@@ -1,7 +1,6 @@
 package utils;
 
 import model.User;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
