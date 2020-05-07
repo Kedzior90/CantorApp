@@ -23,9 +23,9 @@ public class Helper {
         return tradeModel.rate;
     }
 
-    public void test() throws IOException {
-//        http.getRate( "USD", "PLN");
-//        System.out.println(http.getRate( "USD", "PLN"));
+    public String test() {
+        String dupa = "USD";
+        return dupa;
     }
 
     public void setAmount() {
@@ -221,22 +221,3 @@ public class Helper {
         return new User(login, name, surname, password, emailAddress, userId);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

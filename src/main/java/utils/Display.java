@@ -21,71 +21,56 @@ public class Display {
         System.out.print("\n************************************\n");
     }
 
-    public void displayUserRegister() throws IOException {
-        System.out.print("\n************************************\n");
-        System.out.print("\t\t\tRegister User");
-        System.out.print("\n************************************\n");
-
-        System.out.print("Enter User Login: ");
-        user.setUserLogin();
-
-        System.out.print("Enter User Name: ");
-        user.setUserName();
-
-        System.out.print("Enter User Surname: ");
-        user.setUserSurname();
-
-        System.out.print("Enter User Password: ");
-        user.setUserPassword();
-
-        System.out.print("Enter Email Address: ");
-        user.setEmailAddress();
-
-        user.setUserId();
-        helper.saveUserInDatabase(user);
-
-        System.out.print("\n*********** Created User ***********\n");
-        System.out.print("Login:\t\t\t" + user.getUserLogin() +
-                "\nUser Name:\t\t" + user.getUserName() +
-                "\nUser Surname:\t" + user.getUserSurname() +
-                "\nEmail Address:\t" + user.getEmailAddress() +
-                "\nUser ID:\t\t" + user.getUserId());
-        System.out.print("\n************************************\n");
-    }
-
-    public boolean displayLogin() {
-        System.out.print("\n************************************\n");
-        System.out.print("\t\t\tLogin");
-        System.out.print("\n************************************\n");
-
-        System.out.print("Enter User Login: ");
-        user.setUserLogin();
-
-        System.out.print("Enter User Password: ");
-        user.setUserPassword();
-
-        if (helper.loginChecker(user.login, user.password) == true) {
-            System.out.println("Login accepted");
-        } else {
-            System.out.println("Wrong login/password");
-        }
-
-        return helper.loginChecker(user.login, user.password);
-    }
-
-//    public void displayTrade () throws IOException {
-//        System.out.println("\n********** Transaction data **********");
-//        String tradeContent =
-//                "TradeDate: " + helper.getTradeDate() +
-//                        "\nCurrency1:\t" + helper.getCurrency1() +
-//                        "\nCurrency2:\t" + helper.getCurrency2() +
-//                        "\nAmount:\t" + helper.getAmount() +
-//                        "\nRate:\t" + helper.getRate() +
-//                        "\nValue:\t" + helper.getCalculate();
-//        System.out.println(tradeContent);
-//        System.out.print("************************************\n");
+//    public void displayUserRegister() throws IOException {
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t\t\tRegister User");
+//        System.out.print("\n************************************\n");
 //
-//        helper.saveTransaction();
+//        System.out.print("Enter User Login: ");
+//        user.setUserLogin();
+//
+//        System.out.print("Enter User Name: ");
+//        user.setUserName();
+//
+//        System.out.print("Enter User Surname: ");
+//        user.setUserSurname();
+//
+//        System.out.print("Enter User Password: ");
+//        user.setUserPassword();
+//
+//        System.out.print("Enter Email Address: ");
+//        user.setEmailAddress();
+//
+//        user.setUserId();
+//        helper.saveUserInDatabase(user);
+//
+//        System.out.print("\n*********** Created User ***********\n");
+//        System.out.print("Login:\t\t\t" + user.getUserLogin() +
+//                "\nUser Name:\t\t" + user.getUserName() +
+//                "\nUser Surname:\t" + user.getUserSurname() +
+//                "\nEmail Address:\t" + user.getEmailAddress() +
+//                "\nUser ID:\t\t" + user.getUserId());
+//        System.out.print("\n************************************\n");
+//    }
+
+//    public boolean displayLogin() {
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t\t\tLogin");
+//        System.out.print("\n************************************\n");
+//
+//        System.out.print("Enter User Login: ");
+//        user.setUserLogin();
+//
+//        System.out.print("Enter User Password: ");
+//        user.setUserPassword();
+//
+//        if (helper.loginChecker(user.login, user.password) == true) {
+//            System.out.println("Login accepted");
+//        } else {
+//            System.out.println("Wrong login/password");
+//        }
+//
+//        return helper.loginChecker(user.login, user.password);
 //    }
 
     public void displayCheckRates () throws IOException {

@@ -35,45 +35,65 @@ public class User {
         this.userId = getUserId();
     }
 
-    public void setUserLogin () {
-        Scanner scan = new Scanner(System.in);
-        this.login = scan.nextLine();
+//    public void setUserLogin () {
+//        Scanner scan = new Scanner(System.in);
+//        this.login = scan.nextLine();
+//    }
+
+    public void setUserLogin (String login) {
+        this.login = login;
     }
 
     public String getUserLogin(){
         return login;
     }
 
-    public void setUserName () {
-        Scanner scan = new Scanner(System.in);
-        this.name = scan.nextLine();
+//    public void setUserName () {
+//        Scanner scan = new Scanner(System.in);
+//        this.name = scan.nextLine();
+//    }
+
+    public void setUserName (String name) {
+        this.name = name;
     }
 
     public String getUserName(){
         return name;
     }
 
-    public void setUserSurname () {
-        Scanner scan = new Scanner(System.in);
-        this.surname = scan.nextLine();
+//    public void setUserSurname () {
+//        Scanner scan = new Scanner(System.in);
+//        this.surname = scan.nextLine();
+//    }
+
+    public void setUserSurname (String surname) {
+        this.surname = surname;
     }
 
     public String getUserSurname(){
         return surname;
     }
 
-    public void setUserPassword () {
-        Scanner scan = new Scanner(System.in);
-        this.password = scan.nextLine();
+//    public void setUserPassword () {
+//        Scanner scan = new Scanner(System.in);
+//        this.password = scan.nextLine();
+//    }
+
+    public void setUserPassword (String password) {
+        this.password = password;
     }
 
     public String getUserPassword(){
         return password;
     }
 
-    public void setEmailAddress (){
-        Scanner scan = new Scanner(System.in);
-        this.emailAddress = scan.nextLine();
+//    public void setEmailAddress (){
+//        Scanner scan = new Scanner(System.in);
+//        this.emailAddress = scan.nextLine();
+//    }
+
+    public void setEmailAddress (String emailAddress){
+        this.emailAddress = emailAddress;
     }
 
     public String getEmailAddress () {
