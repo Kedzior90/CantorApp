@@ -71,3 +71,4 @@ public class CantorConsole {
         } while(value!=0);
     }
 }
+//todo testt
