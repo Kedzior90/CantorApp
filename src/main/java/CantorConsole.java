@@ -12,10 +12,23 @@ public class CantorConsole {
         configurationLoader.loadProperties();
 
         Wallet wallet = new Wallet();
-        wallet.setProvideAmount();
-        wallet.setDatabaseAmount();
-        wallet.setCountAmount();
-        System.out.println(wallet.getCountAmount());
+        wallet.setEnterWalletEUR();
+        wallet.setDatabaseWalletEUR();
+        wallet.setWalletEUR();
+
+        wallet.setEnterWalletEUR();
+        wallet.setDatabaseWalletEUR();
+        wallet.setWalletEUR();
+
+        wallet.setEnterWalletEUR();
+        wallet.setDatabaseWalletEUR();
+        wallet.setWalletEUR();
+
+        wallet.setEnterWalletEUR();
+        wallet.setDatabaseWalletEUR();
+        wallet.setWalletEUR();
+
+        System.out.println("koniec");
 
 
 //        int value;

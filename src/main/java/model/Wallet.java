@@ -1,38 +1,84 @@
 package model;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Wallet {
-    public String provideAmount;
-    public String databaseAmount;
-    public String countAmount;
+//    public double walletEUR;
+    public double walletEUR;
+    public String walletUSD;
+    public String walletGBP;
+    public double enterWalletEUR;
+    public String enterWalletUSD;
+    public String enterWalletGBP;
+    public double databaseWalletEUR;
+    public String databaseWalletUSD;
+    public String databaseWalletGBP;
 
-    public void setProvideAmount () {
-        System.out.println("Enter amount: ");
+    public void setEnterWalletEUR () {
+        System.out.println("Enter EUR amount: ");
         Scanner scan = new Scanner(System.in);
-        this.provideAmount = scan.nextLine();
+        this.enterWalletEUR = Double.parseDouble(scan.nextLine());
     }
 
-    public String getProvideAmount(){
-        return provideAmount;
+    public double getEnterWalletEUR(){
+        return enterWalletEUR;
     }
 
-    public void setDatabaseAmount () {
+    public void setDatabaseWalletEUR () throws IOException {
        //dodac pobieranie z bazy
-        this.databaseAmount = "100";
+        double wallet = readWalletDatabaseFile();
+        this.databaseWalletEUR = wallet;
     }
 
-    public String getDatabaseAmount(){
-        return databaseAmount;
+    public double getDatabaseWalletEUR(){
+        return databaseWalletEUR;
     }
 
-    public void setCountAmount () {
+    public void setWalletEUR () throws IOException {
         //dodac pobieranie z bazy
-        this.countAmount = getProvideAmount() + getDatabaseAmount();
+        double wallet = getEnterWalletEUR() + getDatabaseWalletEUR();
+        saveWalletInDatabase(wallet);
+        System.out.println(wallet);
+        this.walletEUR = wallet;
     }
 
-    public String getCountAmount(){
-        return countAmount;
+    public double getWalletEUR(){
+        return walletEUR;
     }
 
+    public void saveWalletInDatabase(double wallet) throws IOException {
+//        FileWriter fileWriter = new FileWriter(System.getProperty("user.database"), true);
+        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print(wallet);
+//        printWriter.print(user.userId + ", " + user.login + ", " + user.name + ", " + user.surname + ", "
+//                + user.password + ", " + user.emailAddress + ", " + user.creationDate + "\n");
+        printWriter.close();
+    }
+
+    static double readWalletDatabaseFile() {
+//        List<String> walletList = new ArrayList<>();
+        double walletList = 0;
+
+        try {
+            File myObj = new File(System.getProperty("wallet.database"));
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+//                String[] attributes = data.split(", ");
+//                User user = createUser(attributes);
+//                userList.add(user);
+                walletList = Double.parseDouble(data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        return walletList;
+    }
 }
