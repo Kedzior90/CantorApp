@@ -11,19 +11,27 @@ public class CantorConsole {
     public static void main(String[] args) throws IOException {
         configurationLoader.loadProperties();
 
+        //towrzymy klase Wallet ze zmienna walet
         Wallet wallet = new Wallet();
+        //do tej zmiennej z klasy Wallet przypisujemy funkcje
+//        podanie kasy
+        wallet.setEnterWalletEUR();
+//        wczytanie stanu z bazy danych
+        wallet.setDatabaseWalletEUR();
+//        obliczenie i zapisanie w bazie
+        wallet.setWalletEUR();
+
+        // drugie wykonanie tego samego
         wallet.setEnterWalletEUR();
         wallet.setDatabaseWalletEUR();
         wallet.setWalletEUR();
 
+        // trzecie wykonanie tego samego
         wallet.setEnterWalletEUR();
         wallet.setDatabaseWalletEUR();
         wallet.setWalletEUR();
 
-        wallet.setEnterWalletEUR();
-        wallet.setDatabaseWalletEUR();
-        wallet.setWalletEUR();
-
+        // mozna pomyslec zeby jakas petle z tego zrobic :)
         wallet.setEnterWalletEUR();
         wallet.setDatabaseWalletEUR();
         wallet.setWalletEUR();

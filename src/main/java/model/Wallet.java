@@ -7,12 +7,15 @@ import java.util.Scanner;
 
 public class Wallet {
 //    public double walletEUR;
+    //dana co oblicza i zapisuje
     public double walletEUR;
     public String walletUSD;
     public String walletGBP;
+    //dana co wprowadzasz z klawiatury
     public double enterWalletEUR;
     public String enterWalletUSD;
     public String enterWalletGBP;
+    //dana wczytana z bazy danych
     public double databaseWalletEUR;
     public String databaseWalletUSD;
     public String databaseWalletGBP;
@@ -30,6 +33,7 @@ public class Wallet {
     public void setDatabaseWalletEUR () throws IOException {
        //dodac pobieranie z bazy
         double wallet = readWalletDatabaseFile();
+        System.out.println("wczytano: " + wallet);
         this.databaseWalletEUR = wallet;
     }
 
@@ -41,7 +45,7 @@ public class Wallet {
         //dodac pobieranie z bazy
         double wallet = getEnterWalletEUR() + getDatabaseWalletEUR();
         saveWalletInDatabase(wallet);
-        System.out.println(wallet);
+        System.out.println("zapisano: " + wallet);
         this.walletEUR = wallet;
     }
 
@@ -51,6 +55,7 @@ public class Wallet {
 
     public void saveWalletInDatabase(double wallet) throws IOException {
 //        FileWriter fileWriter = new FileWriter(System.getProperty("user.database"), true);
+        //useniete nadpisywanie pliku, flaga true
         FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
         PrintWriter printWriter = new PrintWriter(fileWriter);
         printWriter.print(wallet);
