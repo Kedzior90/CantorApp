@@ -7,15 +7,6 @@ public class Wallet {
     public String databaseAmount;
     public String countAmount;
 
-    public Wallet(String provideAmount, String databaseAmount, String countAmount) {
-        this.provideAmount = provideAmount;
-        this.databaseAmount = databaseAmount;
-        this.countAmount = countAmount;
-    }
-
-    public Wallet() {
-    }
-
     public void setProvideAmount () {
         System.out.println("Enter amount: ");
         Scanner scan = new Scanner(System.in);
