@@ -2,6 +2,8 @@ package utils;
 
 import model.Trade;
 import model.User;
+import model.Wallet;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -9,6 +11,8 @@ public class Display {
     public static User user = new User();
     public static Trade trade = new Trade();
     public static Database database = new Database();
+    public static Wallet wallet = new Wallet();
+
 
     public void displayMainMenu() {
         System.out.print("\n************************************\n");
@@ -19,6 +23,19 @@ public class Display {
         System.out.print("3. Check rates\n");
         System.out.print("4. Transaction\n");
         System.out.print("0. Exit");
+        System.out.print("\n************************************\n");
+    }
+
+    public void displayWalletMenu() throws IOException {
+        System.out.print("\n************************************\n");
+        System.out.print("\t\t\tUser Wallet");
+        System.out.print("\n************************************\n");
+
+        System.out.print("\t\tWelcome: " + wallet.walletLogin);
+        System.out.print("\n1. Display User Database\n\n");
+        wallet.setEnterWallet();
+        wallet.walletUpdate();
+        System.out.print(wallet);
         System.out.print("\n************************************\n");
     }
 

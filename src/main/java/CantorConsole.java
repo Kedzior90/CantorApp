@@ -10,12 +10,15 @@ public class CantorConsole {
 
     public static void main(String[] args) throws IOException {
         configurationLoader.loadProperties();
-//        Wallet wallet = new Wallet(456, 55, "aaa", "bbb", "ccc");
-        Wallet walletKoncowy = new Wallet();
 
-        walletKoncowy.setEnterWallet();
-        walletKoncowy.walletUpdate();
-        System.out.println("WYNIK KONCOWY: " + walletKoncowy);
+        display.displayWalletMenu();
+
+//        Wallet wallet = new Wallet(456, 55, "aaa", "bbb", "ccc");
+//        Wallet walletKoncowy = new Wallet();
+//
+//        walletKoncowy.setEnterWallet();
+//        walletKoncowy.walletUpdate();
+//        System.out.println("WYNIK KONCOWY: " + walletKoncowy);
 
 
 //        int value;
