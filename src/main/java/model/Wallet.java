@@ -20,14 +20,14 @@ public class Wallet {
     public String databaseWalletUSD;
     public String databaseWalletGBP;
 
-    public void setEnterWalletEUR () {
-        System.out.println("Enter EUR amount: ");
+    public void setEnterWallet() {
+        System.out.println("Charge Wallet: ");
         Scanner scan = new Scanner(System.in);
-        this.enterWalletEUR = Double.parseDouble(scan.nextLine());
+        this.enterWallet = Double.parseDouble(scan.nextLine());
     }
 
-    public double getEnterWalletEUR(){
-        return enterWalletEUR;
+    public double getEnterWallet(){
+        return enterWallet;
     }
 
     public void setDatabaseWalletEUR () throws IOException {
@@ -37,8 +37,8 @@ public class Wallet {
         this.databaseWalletEUR = wallet;
     }
 
-    public double getDatabaseWalletEUR(){
-        return databaseWalletEUR;
+    public double getDatabaseWallet(){
+        return databaseWallet;
     }
 
     public void setWalletEUR () throws IOException {
@@ -49,8 +49,8 @@ public class Wallet {
         this.walletEUR = wallet;
     }
 
-    public double getWalletEUR(){
-        return walletEUR;
+    public double getWallet(){
+        return wallet;
     }
 
     public void saveWalletInDatabase(double wallet) throws IOException {
@@ -64,19 +64,22 @@ public class Wallet {
         printWriter.close();
     }
 
-    static double readWalletDatabaseFile() {
-//        List<String> walletList = new ArrayList<>();
-        double walletList = 0;
+    public void updateWalletInDatabase(Wallet wallet) throws IOException {
+        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print(wallet.wallet);
+        printWriter.close();
+    }
 
+    static Wallet readWalletDatabaseFile() {
+        Wallet walletOutput = new Wallet();
         try {
             File myObj = new File(System.getProperty("wallet.database"));
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-//                String[] attributes = data.split(", ");
-//                User user = createUser(attributes);
-//                userList.add(user);
-                walletList = Double.parseDouble(data);
+                String[] attributes = data.split(", ");
+                walletOutput = createDatabaseWallet(attributes);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -84,6 +87,25 @@ public class Wallet {
             e.printStackTrace();
         }
 
-        return walletList;
+        return walletOutput;
+
+//        ----------------- original --------------
+//        List<Wallet> walletList = new ArrayList<>();
+//        try {
+//            File myObj = new File(System.getProperty("wallet.database"));
+//            Scanner myReader = new Scanner(myObj);
+//            while (myReader.hasNextLine()) {
+//                String data = myReader.nextLine();
+//                String[] attributes = data.split(", ");
+//                Wallet wallet = createDatabaseWallet(attributes);
+//                walletList.add(wallet);
+//            }
+//            myReader.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
+//
+//        return walletList;
     }
 }

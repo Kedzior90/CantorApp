@@ -2,7 +2,6 @@ import model.Wallet;
 import utils.Display;
 import utils.ConfigurationLoader;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class CantorConsole {
     public static Display display = new Display();
@@ -12,32 +11,19 @@ public class CantorConsole {
         configurationLoader.loadProperties();
 
         //towrzymy klase Wallet ze zmienna walet
+
         Wallet wallet = new Wallet();
-        //do tej zmiennej z klasy Wallet przypisujemy funkcje
+
+        wallet.setEnterWallet();
+        wallet.walletUpdate();
+
 //        podanie kasy
-        wallet.setEnterWalletEUR();
-//        wczytanie stanu z bazy danych
-        wallet.setDatabaseWalletEUR();
-//        obliczenie i zapisanie w bazie
-        wallet.setWalletEUR();
-
-        // drugie wykonanie tego samego
-        wallet.setEnterWalletEUR();
-        wallet.setDatabaseWalletEUR();
-        wallet.setWalletEUR();
-
-        // trzecie wykonanie tego samego
-        wallet.setEnterWalletEUR();
-        wallet.setDatabaseWalletEUR();
-        wallet.setWalletEUR();
-
-        // mozna pomyslec zeby jakas petle z tego zrobic :)
-        wallet.setEnterWalletEUR();
-        wallet.setDatabaseWalletEUR();
-        wallet.setWalletEUR();
-
+//        wallet.setEnterWallet();
+//        // drugie wykonanie tego samego
+//        wallet.setEnterWallet();
+//        wallet.setDatabaseWallet();
+//        wallet.setWallet();
         System.out.println("koniec");
-
 
 //        int value;
 //
