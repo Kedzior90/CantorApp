@@ -29,42 +29,52 @@ public class User {
         this.userId = userId;
     }
 
+    public User(int userId, String login, String name, String surname) {
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.userId = userId;
+    }
+
     public User() {
     }
 
     public void setUserLogin () {
+        System.out.print("Enter User Login: ");
         Scanner scan = new Scanner(System.in);
         this.login = scan.nextLine();
     }
 
-    public String getUserLogin(){
+    public String getLogin(){
         return login;
     }
 
-    public void setUserName () {
+    public void setName() {
+        System.out.print("Enter User Name: ");
         Scanner scan = new Scanner(System.in);
         this.name = scan.nextLine();
     }
 
-    public String getUserName(){
+    public String getName(){
         return name;
     }
 
-    public void setUserSurname () {
+    public void setSurname() {
+        System.out.print("Enter User Surname: ");
         Scanner scan = new Scanner(System.in);
         this.surname = scan.nextLine();
     }
 
-    public String getUserSurname(){
+    public String getSurname(){
         return surname;
     }
 
-    public void setUserPassword () {
+    public void setPassword() {
         Scanner scan = new Scanner(System.in);
         this.password = scan.nextLine();
     }
 
-    public String getUserPassword(){
+    public String getPassword(){
         return password;
     }
 

@@ -27,17 +27,17 @@ public class Display {
         System.out.print("\t\t\tRegister User");
         System.out.print("\n************************************\n");
 
-        System.out.print("Enter User Login: ");
+//        System.out.print("Enter User Login: ");
         user.setUserLogin();
 
-        System.out.print("Enter User Name: ");
-        user.setUserName();
+//        System.out.print("Enter User Name: ");
+        user.setName();
 
-        System.out.print("Enter User Surname: ");
-        user.setUserSurname();
+//        System.out.print("Enter User Surname: ");
+        user.setSurname();
 
         System.out.print("Enter User Password: ");
-        user.setUserPassword();
+        user.setPassword();
 
         System.out.print("Enter Email Address: ");
         user.setEmailAddress();
@@ -48,9 +48,9 @@ public class Display {
 
         System.out.print("\n*********** Created User ***********\n");
         System.out.print("User ID:\t\t" + user.getUserId() +
-                "\nLogin:\t\t\t" + user.getUserLogin() +
-                "\nUser Name:\t\t" + user.getUserName() +
-                "\nUser Surname:\t" + user.getUserSurname() +
+                "\nLogin:\t\t\t" + user.getLogin() +
+                "\nUser Name:\t\t" + user.getName() +
+                "\nUser Surname:\t" + user.getSurname() +
                 "\nEmail Address:\t" + user.getEmailAddress() +
                 "\nCreation Date:\t" + user.getCreationDate());
         System.out.print("\n************************************\n");
@@ -65,7 +65,7 @@ public class Display {
         user.setUserLogin();
 
         System.out.print("Enter User Password: ");
-        user.setUserPassword();
+        user.setPassword();
 
         if (database.loginChecker(user.login, user.password) == true) {
             System.out.println("Login accepted");

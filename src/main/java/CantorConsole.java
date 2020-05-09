@@ -1,3 +1,4 @@
+import model.User;
 import model.Wallet;
 import utils.Display;
 import utils.ConfigurationLoader;
@@ -9,21 +10,13 @@ public class CantorConsole {
 
     public static void main(String[] args) throws IOException {
         configurationLoader.loadProperties();
+//        Wallet wallet = new Wallet(456, 55, "aaa", "bbb", "ccc");
+        Wallet walletKoncowy = new Wallet();
 
-        //towrzymy klase Wallet ze zmienna walet
+        walletKoncowy.setEnterWallet();
+        walletKoncowy.walletUpdate();
+        System.out.println("WYNIK KONCOWY: " + walletKoncowy);
 
-        Wallet wallet = new Wallet();
-
-        wallet.setEnterWallet();
-        wallet.walletUpdate();
-
-//        podanie kasy
-//        wallet.setEnterWallet();
-//        // drugie wykonanie tego samego
-//        wallet.setEnterWallet();
-//        wallet.setDatabaseWallet();
-//        wallet.setWallet();
-        System.out.println("koniec");
 
 //        int value;
 //

@@ -1,1 +1,1 @@
-320.56, 123, adamecze, adam, asdasd
+215.0, 0, admin, admin, admin

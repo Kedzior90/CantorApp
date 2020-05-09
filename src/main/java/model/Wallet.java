@@ -1,8 +1,6 @@
 package model;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Wallet {
@@ -30,32 +28,21 @@ public class Wallet {
         return enterWallet;
     }
 
-    public void setDatabaseWalletEUR () throws IOException {
-       //dodac pobieranie z bazy
-        double wallet = readWalletDatabaseFile();
-        System.out.println("wczytano: " + wallet);
-        this.databaseWalletEUR = wallet;
-    }
-
-    public double getDatabaseWallet(){
-        return databaseWallet;
-    }
-
-    public void setWalletEUR () throws IOException {
-        //dodac pobieranie z bazy
-        double wallet = getEnterWalletEUR() + getDatabaseWalletEUR();
-        saveWalletInDatabase(wallet);
-        System.out.println("zapisano: " + wallet);
-        this.walletEUR = wallet;
-    }
-
     public double getWallet(){
         return wallet;
     }
 
-    public void saveWalletInDatabase(double wallet) throws IOException {
-//        FileWriter fileWriter = new FileWriter(System.getProperty("user.database"), true);
-        //useniete nadpisywanie pliku, flaga true
+    public void walletUpdate () throws IOException {
+        Wallet walletDatabase = readWalletDatabaseFile();
+        System.out.println("z databazy zapisane: "+ walletDatabase.wallet);
+//        dodanie wprowadzonej wartosci  i tej z bazy
+        walletDatabase.wallet = walletDatabase.wallet + enterWallet;
+        this.wallet = walletDatabase.wallet;
+        saveWalletInDatabase(walletDatabase);
+        System.out.println("wynik: "+ wallet);
+    }
+
+    public void saveWalletInDatabase(Wallet wallet) throws IOException {
         FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
         PrintWriter printWriter = new PrintWriter(fileWriter);
         printWriter.print(wallet);
@@ -64,15 +51,18 @@ public class Wallet {
         printWriter.close();
     }
 
-    public void updateWalletInDatabase(Wallet wallet) throws IOException {
-        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print(wallet.wallet);
-        printWriter.close();
+    public void checkWalletForName(Wallet wallet) {
+        Wallet walletDatabase = readWalletDatabaseFile();
+
+//        user.setUserId();
+//        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
+//        PrintWriter printWriter = new PrintWriter(fileWriter);
+//        printWriter.print(wallet.wallet);
+//        printWriter.close();
     }
 
     static Wallet readWalletDatabaseFile() {
-        Wallet walletOutput = new Wallet();
+        Wallet walletOutput = null;
         try {
             File myObj = new File(System.getProperty("wallet.database"));
             Scanner myReader = new Scanner(myObj);
@@ -88,24 +78,5 @@ public class Wallet {
         }
 
         return walletOutput;
-
-//        ----------------- original --------------
-//        List<Wallet> walletList = new ArrayList<>();
-//        try {
-//            File myObj = new File(System.getProperty("wallet.database"));
-//            Scanner myReader = new Scanner(myObj);
-//            while (myReader.hasNextLine()) {
-//                String data = myReader.nextLine();
-//                String[] attributes = data.split(", ");
-//                Wallet wallet = createDatabaseWallet(attributes);
-//                walletList.add(wallet);
-//            }
-//            myReader.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        }
-//
-//        return walletList;
     }
 }
