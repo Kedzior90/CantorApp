@@ -13,7 +13,6 @@ public class Display {
     public static Database database = new Database();
     public static Wallet wallet = new Wallet();
 
-
     public void displayMainMenu() {
         System.out.print("\n************************************\n");
         System.out.print("************   Cantor   ************");
@@ -26,16 +25,13 @@ public class Display {
         System.out.print("\n************************************\n");
     }
 
-    public void displayWalletMenu() throws IOException {
+    public void displayWalletMenu() {
         System.out.print("\n************************************\n");
-        System.out.print("\t\t\tUser Wallet");
+        System.out.print("\t\t\t" + wallet.walletLogin + " wallet");
         System.out.print("\n************************************\n");
-
-        System.out.print("\t\tWelcome: " + wallet.walletLogin);
-        System.out.print("\n1. Display User Database\n\n");
-        wallet.setEnterWallet();
-        wallet.walletUpdate();
-        System.out.print(wallet);
+        System.out.print("1. Display Wallet Balance\n");
+        System.out.print("2. Charge Wallet\n");
+        System.out.print("9. <- Back Menu\n");
         System.out.print("\n************************************\n");
     }
 
@@ -144,16 +140,16 @@ public class Display {
         System.out.print("\t\t\tUser Menu");
         System.out.print("\n************************************\n");
         System.out.print("\t\tWelcome: " + user.login);
-        System.out.print("\n1. Transaction");
-        System.out.print("\n2. Display Trade's Database");
-        System.out.print("\n3. Display User's Database");
-        System.out.print("\n4. Display Users' sorted by ID");
-        System.out.print("\n5. Display Users' sorted by Login");
-        System.out.print("\n6. Display Users' sorted by Name");
-        System.out.print("\n7. Display Users' sorted by Surname");
-        System.out.print("\n8. Display Users' sorted by Email Address");
-        System.out.print("\n9. Display Users' sorted by Creation date");
-        System.out.print("\n10. <- Back Menu");
+        System.out.print("1. Transaction\n");
+        System.out.print("2. Display Trade's Database");
+        System.out.print("3. Display User's Database\n");
+        System.out.print("4. Display Users' sorted by ID\n");
+        System.out.print("5. Display Users' sorted by Login\n");
+        System.out.print("6. Display Users' sorted by Name\n");
+        System.out.print("7. Display Users' sorted by Surname\n");
+        System.out.print("8. Display Users' sorted by Email Address\n");
+        System.out.print("9. Display Users' sorted by Creation date\n");
+        System.out.print("10. <- Back Menu\n");
         System.out.print("\n************************************\n");
     }
 
@@ -168,6 +164,24 @@ public class Display {
             System.out.println("ID: " + k + ", " + tradeList.get(i));
             k++;
         }
+    }
+
+    public void displayWalletBalance() throws IOException {
+        System.out.print("\n************************************\n");
+        System.out.print("\t\t" + wallet.walletLogin + " wallet balance");
+        System.out.print("\n************************************\n");
+        wallet.setWallet();
+        System.out.println("Value: " + wallet.checkWalletBalance());
+    }
+
+    public void displayChargeBalance() throws IOException {
+        System.out.print("\n************************************\n");
+        System.out.print("\t" + wallet.walletLogin + " charge wallet balance");
+        System.out.print("\n************************************\n");
+        System.out.println("Charge Wallet: ");
+        wallet.setEnterWallet();
+        wallet.walletUpdate();
+//        System.out.print(wallet);
     }
 
     public void displayUserDatabaseFile() {

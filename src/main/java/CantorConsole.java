@@ -11,7 +11,10 @@ public class CantorConsole {
     public static void main(String[] args) throws IOException {
         configurationLoader.loadProperties();
 
-        display.displayWalletMenu();
+//        display.displayWalletMenu();
+        display.displayWalletBalance();
+        display.displayChargeBalance();
+        display.displayWalletBalance();
 
 //        Wallet wallet = new Wallet(456, 55, "aaa", "bbb", "ccc");
 //        Wallet walletKoncowy = new Wallet();
