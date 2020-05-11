@@ -84,6 +84,9 @@ public class Wallet {
 //        zmiana wartosci portfela dla tego jednego uzytkownika
         searchUserWallet.walletBalance = updateWalletValue;
 //        System.out.println("uzytkownik z nowa wartoscia portfela -> \n" + searchUserWallet);
+//        System.out.println("wartosc portfela PRZED update -> \n" + this.walletBalance);
+        this.walletBalance = updateWalletValue;
+//        System.out.println("wartosc portfela PO update -> \n" + this.walletBalance);
 //
 //        tworzenie listy uzytkownikow z uzytkownikiem ktory ma nowa wartosc portfela
 //        System.out.println("lista uzytkownikow z nowym portfelem -> \n" + searchWalletList);

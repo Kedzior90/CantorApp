@@ -190,6 +190,13 @@ public class Display {
         System.out.println("Charge Wallet: ");
         wallet.setEnterWallet();
         wallet.walletUpdate();
+
+        System.out.print("\n********** Wallet Status **********\n");
+        System.out.print("Wallet balance: " + wallet.walletBalance +
+                "\nLogin:\t\t\t" + wallet.walletLogin +
+                "\nName:\t\t\t" + wallet.walletName +
+                "\nSurname:\t\t" + wallet.walletSurname);
+        System.out.print("\n************************************\n");
     }
 
     public void displayUserDatabaseFile() {
