@@ -1,3 +1,3 @@
 0.0, 0, adminLogin, adminName, adminSurname
-90.0, 5555, a, a, a
-242.0, 222, c, c, c
+120.0, 5555, a, a, a
+247.0, 222, c, c, c

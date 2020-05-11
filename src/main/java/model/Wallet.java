@@ -41,8 +41,6 @@ public class Wallet {
                 .findAny()
                 .orElse(null);
         return this.walletBalance = searchUserWallet.walletBalance;
-//        Wallet setWallet = searchUserWallet();
-//        return this.wallet = setWallet.wallet;
     }
 
     public Wallet searchUserWallet() {
@@ -101,13 +99,13 @@ public class Wallet {
         printWriter.close();
     }
 
-    public void saveWalletInDatabase(Wallet wallet) throws IOException {
-        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print(wallet.walletBalance + ", " + wallet.walletUserId + ", " + wallet.walletLogin + ", " +
-                                wallet.walletName + ", " + wallet.walletSurname);
-        printWriter.close();
-    }
+//    public void saveWalletInDatabase(Wallet wallet) throws IOException {
+//        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
+//        PrintWriter printWriter = new PrintWriter(fileWriter);
+//        printWriter.print(wallet.walletBalance + ", " + wallet.walletUserId + ", " + wallet.walletLogin + ", " +
+//                                wallet.walletName + ", " + wallet.walletSurname);
+//        printWriter.close();
+//    }
 
 //    static Wallet readWalletDatabaseFile() {
 //        Wallet walletOutput = null;
