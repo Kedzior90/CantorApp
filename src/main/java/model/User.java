@@ -40,7 +40,7 @@ public class User {
     }
 
     public void setUserLogin () {
-        System.out.print("Enter User Login: ");
+        System.out.print("Enter Login: ");
         Scanner scan = new Scanner(System.in);
         this.login = scan.nextLine();
     }
@@ -50,7 +50,7 @@ public class User {
     }
 
     public void setName() {
-        System.out.print("Enter User Name: ");
+        System.out.print("Enter Name: ");
         Scanner scan = new Scanner(System.in);
         this.name = scan.nextLine();
     }
@@ -60,7 +60,7 @@ public class User {
     }
 
     public void setSurname() {
-        System.out.print("Enter User Surname: ");
+        System.out.print("Enter Surname: ");
         Scanner scan = new Scanner(System.in);
         this.surname = scan.nextLine();
     }
@@ -70,6 +70,7 @@ public class User {
     }
 
     public void setPassword() {
+        System.out.print("Enter Password: ");
         Scanner scan = new Scanner(System.in);
         this.password = scan.nextLine();
     }
@@ -79,6 +80,7 @@ public class User {
     }
 
     public void setEmailAddress (){
+        System.out.print("Enter Email Address: ");
         Scanner scan = new Scanner(System.in);
         this.emailAddress = scan.nextLine();
     }

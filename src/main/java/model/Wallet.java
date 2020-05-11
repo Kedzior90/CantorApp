@@ -35,28 +35,65 @@ public class Wallet {
     }
 
     public double setWallet() {
-        List<Wallet> searchWalletList = readWalletDatabaseFile();
-        Wallet searchUserWallet = searchWalletList.stream()
-                .filter(wallet -> walletLogin.equals(wallet.walletLogin))
-                .findAny()
-                .orElse(null);
-        return this.walletBalance = searchUserWallet.walletBalance;
-    }
-
-    public Wallet searchUserWallet() {
 //        wziete ze stronki https://www.baeldung.com/find-list-element-java
 //        Customer james = customers.stream()
 //                .filter(customer -> "James".equals(customer.getName()))
 //                .findAny()
 //                .orElse(null);
-        List<Wallet> searchWalletList = readWalletDatabaseFile();
-        Wallet searchUserWallet2 = searchWalletList.stream()
-                .filter(wallet -> walletLogin.equals(wallet.walletLogin))
-                .findAny()
-                .orElse(null);
-//        System.out.println(searchUserWallet);
-        return searchUserWallet2;
+
+//        for (int i = 0; i < searchWalletList.size(); i++) {
+//            printWriter.print(searchWalletList.get(i) + "\n");
+//        }
+
+        List<Wallet> searchWalletList3 = readWalletDatabaseFile();
+        System.out.println("lista PO setWallet: " + searchWalletList3);
+
+        int dupa = 0;
+        for (int i = 0; i < searchWalletList3.size(); i++) {
+//            System.out.println("lista e petli for: " + searchWalletList3.get(i));
+            System.out.println("wartosc kazdego: " + searchWalletList3.get(i).walletBalance);
+            System.out.println("wartosc jednego: " + searchWalletList3);
+
+//            TUTAJ ROBIC linijka wartosc jednego
+
+//            dupa = searchWalletList3.indexOf(walletBalance);
+//            System.out.println("wartosc jednego: " + dupa);
+        }
+
+//        for (int i = 0; i < searchWalletList.size(); i++) {
+//            if (searchUserWallet.equals(wallet.walletLogin)) {
+//                this.walletBalance = searchUserWallet.walletBalance;
+//            }
+//        }
+//              Wallet searchUserWallet3 = searchWalletList.stream()
+//                .filter(wallet -> walletLogin.equals(wallet.walletLogin))
+//                .findAny()
+//                .orElse(null);
+
+//        Wallet searchUserWallet3 = searchWalletList.stream()
+//                .filter(wallet -> walletLogin.equals(wallet.walletLogin))
+//                .findAny()
+//                .orElse(null);
+        System.out.println("walet jednego uzytkownika: " + searchWalletList3.get(1).walletBalance);
+//        return searchUserWallet.walletBalance;
+//        return this.walletBalance = searchUserWallet3.walletBalance;
+        return 1;
     }
+
+//    public Wallet searchUserWallet() {
+////        wziete ze stronki https://www.baeldung.com/find-list-element-java
+////        Customer james = customers.stream()
+////                .filter(customer -> "James".equals(customer.getName()))
+////                .findAny()
+////                .orElse(null);
+//        List<Wallet> searchWalletList3 = readWalletDatabaseFile();
+//        Wallet searchUserWallet2 = (Wallet) searchWalletList3.stream()
+//                .filter(wallet -> walletLogin.equals(wallet.walletLogin));
+////                .findAny()
+////                .orElse(null);
+////        System.out.println(searchUserWallet);
+//        return searchUserWallet2;
+//    }
 
     public double checkWalletBalance () {
 //        System.out.println("Wallet balance: "+ wallet);
@@ -98,33 +135,6 @@ public class Wallet {
         }
         printWriter.close();
     }
-
-//    public void saveWalletInDatabase(Wallet wallet) throws IOException {
-//        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
-//        PrintWriter printWriter = new PrintWriter(fileWriter);
-//        printWriter.print(wallet.walletBalance + ", " + wallet.walletUserId + ", " + wallet.walletLogin + ", " +
-//                                wallet.walletName + ", " + wallet.walletSurname);
-//        printWriter.close();
-//    }
-
-//    static Wallet readWalletDatabaseFile() {
-//        Wallet walletOutput = null;
-//        try {
-//            File myObj = new File(System.getProperty("wallet.database"));
-//            Scanner myReader = new Scanner(myObj);
-//            while (myReader.hasNextLine()) {
-//                String data = myReader.nextLine();
-//                String[] attributes = data.split(", ");
-//                walletOutput = createWalletDatabase(attributes);
-//            }
-//            myReader.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        }
-//
-//        return walletOutput;
-//    }
 
     static List<Wallet> readWalletDatabaseFile() {
         List<Wallet> walletList = new ArrayList<>();

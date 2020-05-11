@@ -49,10 +49,10 @@ public class Display {
 //        System.out.print("Enter User Surname: ");
         user.setSurname();
 
-        System.out.print("Enter User Password: ");
+//        System.out.print("Enter User Password: ");
         user.setPassword();
 
-        System.out.print("Enter Email Address: ");
+//        System.out.print("Enter Email Address: ");
         user.setEmailAddress();
 
         user.setUserId();
@@ -74,10 +74,10 @@ public class Display {
         System.out.print("\t\t\tLogin");
         System.out.print("\n************************************\n");
 
-        System.out.print("Enter User Login: ");
+//        System.out.print("Enter User Login: ");
         user.setUserLogin();
 
-        System.out.print("Enter User Password: ");
+//        System.out.print("Enter User Password: ");
         user.setPassword();
 
         if (database.loginChecker(user.login, user.password) == true) {
@@ -139,19 +139,34 @@ public class Display {
         System.out.print("\n************************************\n");
         System.out.print("\t\t\tUser Menu");
         System.out.print("\n************************************\n");
-        System.out.print("\t\tWelcome: " + user.login);
+        System.out.print("\t\tWelcome: " + user.login + "\n");
         System.out.print("1. Transaction\n");
-        System.out.print("2. Display Trade's Database");
-        System.out.print("3. Display User's Database\n");
-        System.out.print("4. Display Users' sorted by ID\n");
-        System.out.print("5. Display Users' sorted by Login\n");
-        System.out.print("6. Display Users' sorted by Name\n");
-        System.out.print("7. Display Users' sorted by Surname\n");
-        System.out.print("8. Display Users' sorted by Email Address\n");
-        System.out.print("9. Display Users' sorted by Creation date\n");
-        System.out.print("10. <- Back Menu\n");
+        System.out.print("2. Charge Wallet\n");
+        System.out.print("3. Display Wallet's Balance\n");
+        System.out.print("4. Display User's Database\n");
+        System.out.print("5. Display Trade's Database\n");
+        System.out.print("6. Display Transaction's Database -> TO DO\n");
+        System.out.print("9. <- Back Menu\n");
         System.out.print("\n************************************\n");
     }
+
+//    public void displayUserMenu() {
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t\t\tUser Menu");
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t\tWelcome: " + user.login + "\n");
+//        System.out.print("1. Transaction\n");
+//        System.out.print("2. Display Trade's Database\n");
+//        System.out.print("3. Display User's Database\n");
+//        System.out.print("4. Display Users' sorted by ID\n");
+//        System.out.print("5. Display Users' sorted by Login\n");
+//        System.out.print("6. Display Users' sorted by Name\n");
+//        System.out.print("7. Display Users' sorted by Surname\n");
+//        System.out.print("8. Display Users' sorted by Email Address\n");
+//        System.out.print("9. Display Users' sorted by Creation date\n");
+//        System.out.print("10. <- Back Menu\n");
+//        System.out.print("\n************************************\n");
+//    }
 
     public void displayTradeFile() {
         System.out.print("\n************************************\n");
@@ -168,7 +183,8 @@ public class Display {
 
     public void displayWalletBalance() throws IOException {
         System.out.print("\n************************************\n");
-        System.out.print("\t\t" + wallet.walletLogin + " wallet balance");
+//        System.out.print("\t\t" + wallet.walletLogin + " wallet balance");
+        System.out.print("\t\t" + user.login + " wallet balance");
         System.out.print("\n************************************\n");
         wallet.setWallet();
         System.out.println("Value: " + wallet.getWalletBalance());
@@ -183,9 +199,9 @@ public class Display {
 //        System.out.println("Value: " + wallet.walletBalance);
 //    }
 
-    public void displayChargeBalance() throws IOException {
+    public void displayChargeWallet() throws IOException {
         System.out.print("\n************************************\n");
-        System.out.print("\t" + wallet.walletLogin + " charge wallet balance");
+        System.out.print("\t" + user.login + " charge wallet balance");
         System.out.print("\n************************************\n");
         System.out.println("Charge Wallet: ");
         wallet.setEnterWallet();
