@@ -1,5 +1,3 @@
-import model.User;
-import model.Wallet;
 import utils.Display;
 import utils.ConfigurationLoader;
 import java.io.IOException;
@@ -15,14 +13,6 @@ public class CantorConsole {
         display.displayWalletBalance();
         display.displayChargeBalance();
         display.displayWalletBalance();
-
-//        Wallet wallet = new Wallet(456, 55, "aaa", "bbb", "ccc");
-//        Wallet walletKoncowy = new Wallet();
-//
-//        walletKoncowy.setEnterWallet();
-//        walletKoncowy.walletUpdate();
-//        System.out.println("WYNIK KONCOWY: " + walletKoncowy);
-
 
 //        int value;
 //

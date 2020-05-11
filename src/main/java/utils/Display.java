@@ -171,8 +171,17 @@ public class Display {
         System.out.print("\t\t" + wallet.walletLogin + " wallet balance");
         System.out.print("\n************************************\n");
         wallet.setWallet();
-        System.out.println("Value: " + wallet.checkWalletBalance());
+        System.out.println("Value: " + wallet.getWalletBalance());
     }
+
+//    public void displaySearchUserWallet() throws IOException {
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t\t" + wallet.walletLogin + " search user wallet");
+//        System.out.print("\n************************************\n");
+////        wallet.searchUserWallet();
+//        wallet.setWallet();
+//        System.out.println("Value: " + wallet.walletBalance);
+//    }
 
     public void displayChargeBalance() throws IOException {
         System.out.print("\n************************************\n");
@@ -181,7 +190,6 @@ public class Display {
         System.out.println("Charge Wallet: ");
         wallet.setEnterWallet();
         wallet.walletUpdate();
-//        System.out.print(wallet);
     }
 
     public void displayUserDatabaseFile() {
