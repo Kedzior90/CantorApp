@@ -4,19 +4,60 @@ import java.io.*;
 import java.util.*;
 
 public class Wallet {
-//    public double walletEUR;
-    //dana co oblicza i zapisuje
-    public double walletEUR;
-    public String walletUSD;
-    public String walletGBP;
-    //dana co wprowadzasz z klawiatury
-    public double enterWalletEUR;
-    public String enterWalletUSD;
-    public String enterWalletGBP;
-    //dana wczytana z bazy danych
-    public double databaseWalletEUR;
-    public String databaseWalletUSD;
-    public String databaseWalletGBP;
+    int nowaZmiennaUsun = 0;
+    public double walletBalance;
+    public double enterWallet;
+    public int walletUserId;
+    public String walletLogin;
+    public String walletName;
+    public String walletSurname;
+
+    public Wallet (double walletBalance, int walletUserId, String walletLogin, String walletName, String walletSurname) {
+        this.walletBalance = walletBalance;
+        this.walletUserId = walletUserId;
+        this.walletLogin = walletLogin;
+        this.walletName = walletName;
+        this.walletSurname = walletSurname;
+    }
+
+    public Wallet () {
+        this.walletBalance = getWalletBalance();
+        this.walletUserId = getUserID();
+        this.walletLogin = getLogin();
+        this.walletName = getName();
+        this.walletSurname = getSurname();
+    }
+
+    public int getUserID() {
+        User user = new User();
+//        user.setUserId();
+//        System.out.println("user id");
+        return walletUserId = user.userId;
+    }
+
+    public String getLogin() {
+        User user = new User();
+//        user.setUserLogin();
+//        System.out.println("user.login: " + user.login);
+//        System.out.println("walletLogin: " + walletLogin);
+        return walletLogin = user.login;
+    }
+
+    public String getName() {
+        User user = new User();
+//        user.setName();
+//        user.setName();
+//        System.out.println("name");
+        return walletName = user.name;
+    }
+
+    private String getSurname() {
+        User user = new User();
+//        user.setSurname();
+//        User user = new User();
+//        return walletSurname = user.surname;
+        return walletSurname = user.surname;
+    }
 
     public void setEnterWallet() {
 //        System.out.println("Charge Wallet: ");
@@ -110,7 +151,32 @@ public class Wallet {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return walletList;
+    }
 
-        return walletOutput;
+    private static Wallet createWalletDatabase(String[] metadata) {
+        double wallet = Double.parseDouble(metadata[0]);
+        int walletUserId = Integer.parseInt(metadata[1]);
+        String walletLogin = metadata[2];
+        String walletName = metadata[3];
+        String walletSurname = metadata[4];
+
+        return new Wallet(wallet, walletUserId, walletLogin, walletName, walletSurname);
+    }
+
+    private Wallet createUserWallet(double walletBalanceCreator, int walletUserIdCreator, String walletLoginCreator,
+                                           String walletNameCreator, String walletSurnameCreator) {
+        this.walletBalance = walletBalanceCreator;
+        this.walletUserId = walletUserIdCreator;
+        this.walletLogin = walletLoginCreator;
+        this.walletName = walletNameCreator;
+        this.walletSurname = walletSurnameCreator;
+
+        return new Wallet(walletBalance, walletUserId, walletLogin, walletName, walletSurname);
+    }
+
+    public String toString() {
+        return walletBalance + ", " + walletUserId + ", " + walletLogin +
+                ", " + walletName + ", " + walletSurname;
     }
 }
