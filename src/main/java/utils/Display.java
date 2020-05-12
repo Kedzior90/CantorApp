@@ -47,7 +47,6 @@ public class Display {
         database.saveUserInDatabase(user);
         wallet.saveNewUserInWalletDatabase(user);
 
-//        todo dodac tworzenie nowego portfela dla uzytkownika
         System.out.print("\n*********** Created User ***********\n");
         System.out.print("User ID:\t\t" + user.getUserId() +
                 "\nLogin:\t\t\t" + user.getLogin() +

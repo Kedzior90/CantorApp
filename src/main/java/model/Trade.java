@@ -56,7 +56,7 @@ public class Trade {
 
     public void setRate(String currency1, String currency2) throws IOException {
         HttpConnection http = new HttpConnection();
-        this.rate = http.getRate(currency1, currency2);
+        this.rate = http.getHttpRate(currency1, currency2);
     }
 
     public double getRate() {

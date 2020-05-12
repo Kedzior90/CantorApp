@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class HttpConnection {
 
-    public double getRate (String currency1, String currency2) throws IOException {
+    public double getHttpRate(String currency1, String currency2) throws IOException {
         String ratesHttpApi = System.getProperty("rate.http.api");
         String ulrForRates = ratesHttpApi + currency1;
         double getRate;
