@@ -1,5 +1,5 @@
 package utils;
 
 public class Helper {
-    //class free to use
+    // class free to use
 }

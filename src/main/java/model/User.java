@@ -6,9 +6,9 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
-//ciekawy projekt do podpatrzenia https://www.journaldev.com/2315/java-json-example
-//listy artyhul https://www.geeksforgeeks.org/arrays-sort-in-java-with-examples/
-//stronka jak odczytac plik https://www.java67.com/2015/08/how-to-load-data-from-csv-file-in-java.html
+// ciekawy projekt do podpatrzenia https://www.journaldev.com/2315/java-json-example
+// listy artyhul https://www.geeksforgeeks.org/arrays-sort-in-java-with-examples/
+// stronka jak odczytac plik https://www.java67.com/2015/08/how-to-load-data-from-csv-file-in-java.html
 
 public class User {
     public String login;

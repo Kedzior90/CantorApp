@@ -10,7 +10,7 @@ public class CantorConsole {
     public static void main(String[] args) throws IOException {
         configurationLoader.loadProperties();
 
-//        todo przeniesc do display class
+//        todo przeniesc do Display class
         int value;
         do
         {

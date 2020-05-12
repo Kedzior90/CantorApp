@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Database {
-    //For User class
+    // For User class
     public void saveUserInDatabase(User user) throws IOException {
         FileWriter fileWriter = new FileWriter(System.getProperty("user.database"), true);
         PrintWriter printWriter = new PrintWriter(fileWriter);

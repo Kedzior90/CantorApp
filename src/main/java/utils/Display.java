@@ -248,7 +248,7 @@ public class Display {
 
     public void displayTest (){
         System.out.print("\n************************************\n");
-        System.out.print("\t\tTest");
+        System.out.print("\t\tTest *");
         System.out.print("\n************************************\n");
     }
 

@@ -7,7 +7,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-//stronki z ktorych korzystalem
+//        stronki z ktorych korzystalem
 //        https://exchangeratesapi.io/
 //        https://api.exchangeratesapi.io/latest?base=USD
 

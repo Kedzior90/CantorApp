@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public class Wallet {
-    int nowaZmiennaUsun = 0;
     public double walletBalance;
     public double enterWallet;
     public int walletUserId;
