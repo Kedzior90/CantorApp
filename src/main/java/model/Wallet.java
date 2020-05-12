@@ -87,6 +87,13 @@ public class Wallet {
         printWriter.close();
     }
 
+    public void saveNewUserInWalletDatabase(User user) throws IOException {
+        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"), true);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print(walletBalance + ", " + user.userId + ", " + user.login + ", " + user.name + ", " + user.surname + "\n");
+        printWriter.close();
+    }
+
     static List<Wallet> readWalletDatabaseFile() {
         List<Wallet> walletList = new ArrayList<>();
         try {

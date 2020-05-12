@@ -10,13 +10,7 @@ public class CantorConsole {
     public static void main(String[] args) throws IOException {
         configurationLoader.loadProperties();
 
-//        display.displayWalletMenu();
-//        display.displayWalletBalance();
-//        display.displayChargeBalance();
-//        display.displayWalletBalance();
-
         int value;
-
         do
         {
             display.displayMainMenu();

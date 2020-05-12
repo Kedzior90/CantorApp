@@ -1,5 +1,6 @@
-25.0, 0, adminLogin, adminName, adminSurname
-290.0, 5555, a, a, a
-1836.8, 222, c, c, c
-665.0, 6, b, b, b
-2222.2, 8, fff, sad, zc
+0.0, 0, adminLogin, adminName, adminSurname
+15.0, 4430, a, a, a
+1.0, 6326, b, b, b
+0.0, 1515, JaneczekKowalik, Jan, Kowal
+0.0, 2634, dasd, zxc, sdfgv
+0.0, 1724, vcvb, hgf, n

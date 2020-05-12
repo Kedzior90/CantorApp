@@ -45,6 +45,7 @@ public class Display {
         user.setUserId();
         user.setDataCreation();
         database.saveUserInDatabase(user);
+        wallet.saveNewUserInWalletDatabase(user);
 
 //        todo dodac tworzenie nowego portfela dla uzytkownika
         System.out.print("\n*********** Created User ***********\n");
@@ -64,9 +65,9 @@ public class Display {
         user.setUserLogin(); // System.out.print("Enter User Login: ");
         user.setPassword(); // System.out.print("Enter User Password: ");
         if (database.loginChecker(user.login, user.password) == true) {
-            System.out.println("Login accepted");
+            System.out.println("\tLogin accepted");
         } else {
-            System.out.println("Wrong login/password");
+            System.out.println("\tWrong login/password");
         }
 
         return database.loginChecker(user.login, user.password);
