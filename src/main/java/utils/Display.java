@@ -24,41 +24,29 @@ public class Display {
         System.out.print("0. Exit");
         System.out.print("\n************************************\n");
     }
-
-    public void displayWalletMenu() {
-        System.out.print("\n************************************\n");
-        System.out.print("\t\t\t" + wallet.walletLogin + " wallet");
-        System.out.print("\n************************************\n");
-        System.out.print("1. Display Wallet Balance\n");
-        System.out.print("2. Charge Wallet\n");
-        System.out.print("9. <- Back Menu\n");
-        System.out.print("\n************************************\n");
-    }
-
+//    public void displayWalletMenu() {
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t\t\t" + wallet.walletLogin + " wallet");
+//        System.out.print("\n************************************\n");
+//        System.out.print("1. Display Wallet Balance\n");
+//        System.out.print("2. Charge Wallet\n");
+//        System.out.print("9. <- Back Menu\n");
+//        System.out.print("\n************************************\n");
+//    }
     public void displayUserRegister() throws IOException {
         System.out.print("\n************************************\n");
         System.out.print("\t\t\tRegister User");
         System.out.print("\n************************************\n");
-
-//        System.out.print("Enter User Login: ");
-        user.setUserLogin();
-
-//        System.out.print("Enter User Name: ");
-        user.setName();
-
-//        System.out.print("Enter User Surname: ");
-        user.setSurname();
-
-//        System.out.print("Enter User Password: ");
-        user.setPassword();
-
-//        System.out.print("Enter Email Address: ");
-        user.setEmailAddress();
-
+        user.setUserLogin(); // System.out.print("Enter User Login: ");
+        user.setName(); // System.out.print("Enter User Name: ");
+        user.setSurname(); // System.out.print("Enter User Surname: ");
+        user.setPassword(); // System.out.print("Enter User Password: ");
+        user.setEmailAddress(); // System.out.print("Enter Email Address: ");
         user.setUserId();
         user.setDataCreation();
         database.saveUserInDatabase(user);
 
+//        todo dodac tworzenie nowego portfela dla uzytkownika
         System.out.print("\n*********** Created User ***********\n");
         System.out.print("User ID:\t\t" + user.getUserId() +
                 "\nLogin:\t\t\t" + user.getLogin() +
@@ -73,13 +61,8 @@ public class Display {
         System.out.print("\n************************************\n");
         System.out.print("\t\t\tLogin");
         System.out.print("\n************************************\n");
-
-//        System.out.print("Enter User Login: ");
-        user.setUserLogin();
-
-//        System.out.print("Enter User Password: ");
-        user.setPassword();
-
+        user.setUserLogin(); // System.out.print("Enter User Login: ");
+        user.setPassword(); // System.out.print("Enter User Password: ");
         if (database.loginChecker(user.login, user.password) == true) {
             System.out.println("Login accepted");
         } else {
@@ -181,29 +164,22 @@ public class Display {
         }
     }
 
-    public void displayWalletBalance() throws IOException {
+    public void displayWalletBalance() {
         System.out.print("\n************************************\n");
-//        System.out.print("\t\t" + wallet.walletLogin + " wallet balance");
-        System.out.print("\t\t" + user.login + " wallet balance");
+        System.out.print("\t*" + user.login + "* wallet balance");
         System.out.print("\n************************************\n");
-        wallet.setWallet();
-        System.out.println("Value: " + wallet.getWalletBalance());
+        user.setDataCreation();
+        System.out.println("Status on: \t\t" + user.getCreationDate());
+        wallet.searchUserWallet(user); // szukanie uzytkownika po loginie w bazie danych i tworzenie mu portfela na podstawie danych z bazy danych
+        System.out.println("Wallet Balance: " + wallet.walletBalance);
     }
 
-//    public void displaySearchUserWallet() throws IOException {
-//        System.out.print("\n************************************\n");
-//        System.out.print("\t\t" + wallet.walletLogin + " search user wallet");
-//        System.out.print("\n************************************\n");
-////        wallet.searchUserWallet();
-//        wallet.setWallet();
-//        System.out.println("Value: " + wallet.walletBalance);
-//    }
-
-    public void displayChargeWallet() throws IOException {
+    public void displayWalletCharge() throws IOException {
         System.out.print("\n************************************\n");
-        System.out.print("\t" + user.login + " charge wallet balance");
+        System.out.print("\t*" + user.login + "* charge wallet balance");
         System.out.print("\n************************************\n");
-        System.out.println("Charge Wallet: ");
+        wallet.searchUserWallet(user); //tworzenie portfela zalagowanego uzytkownika
+        System.out.println("Enter Value: ");
         wallet.setEnterWallet();
         wallet.walletUpdate();
 
@@ -270,11 +246,10 @@ public class Display {
         database.userListSortedByCreationDate();
     }
 
-    public void displayTest() {
+    public void displayTest (){
         System.out.print("\n************************************\n");
         System.out.print("\t\tTest");
         System.out.print("\n************************************\n");
-
     }
 
 //    -------------------------------do not remove !!! to use for future main menu fixing ------------------------------------

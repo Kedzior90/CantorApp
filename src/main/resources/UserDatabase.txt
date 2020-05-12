@@ -1,4 +1,4 @@
-0, adminLogin, adminName, adminSurname, adminPass, admin@email.pl, 2020/05/08 20:19:30
+0, adminLogin, adminName, adminSurname, adminPassword, admin@email.pl, 2020/05/08 20:19:30
 2822, adamAdameczek, adam, adameczek, adamPassword, adameczek@email.pl, 2020/05/11 03:52:59
 1615, a, a, a, a, a, 2020/05/11 03:56:00
 6280, b, b, b, b, b, 2020/05/11 03:59:11

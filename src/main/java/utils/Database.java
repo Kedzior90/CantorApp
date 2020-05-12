@@ -72,8 +72,7 @@ public class Database {
         String emailAddress = metadata[5];
         String creationDate = metadata[6];
 
-        // create and return user of this metadata
-        return new User(userId, login, name, surname, password, emailAddress, creationDate);
+        return new User(userId, login, name, surname, password, emailAddress, creationDate); //create and return user of this metadata
     }
 
     public void userListSortedById() {
@@ -179,8 +178,7 @@ public class Database {
         double value = Double.parseDouble(metadata[4]);
         String tradeDate = metadata[5];
 
-        // create and return trade of this metadata
-        return new Trade(amount, currency1, currency2, rate, value, tradeDate);
+        return new Trade(amount, currency1, currency2, rate, value, tradeDate); // create and return trade of this metadata
     }
 
     public void tradeListSortedByCurrency1() {

@@ -1,9 +1,7 @@
 package model;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Wallet {
 //    public double walletEUR;
@@ -35,65 +33,30 @@ public class Wallet {
     }
 
     public double setWallet() {
-//        wziete ze stronki https://www.baeldung.com/find-list-element-java
-//        Customer james = customers.stream()
-//                .filter(customer -> "James".equals(customer.getName()))
-//                .findAny()
-//                .orElse(null);
-
-//        for (int i = 0; i < searchWalletList.size(); i++) {
-//            printWriter.print(searchWalletList.get(i) + "\n");
-//        }
-
-        List<Wallet> searchWalletList3 = readWalletDatabaseFile();
-        System.out.println("lista PO setWallet: " + searchWalletList3);
-
-        int dupa = 0;
-        for (int i = 0; i < searchWalletList3.size(); i++) {
-//            System.out.println("lista e petli for: " + searchWalletList3.get(i));
-            System.out.println("wartosc kazdego: " + searchWalletList3.get(i).walletBalance);
-            System.out.println("wartosc jednego: " + searchWalletList3);
-
-//            TUTAJ ROBIC linijka wartosc jednego
-
-//            dupa = searchWalletList3.indexOf(walletBalance);
-//            System.out.println("wartosc jednego: " + dupa);
-        }
-
-//        for (int i = 0; i < searchWalletList.size(); i++) {
-//            if (searchUserWallet.equals(wallet.walletLogin)) {
-//                this.walletBalance = searchUserWallet.walletBalance;
-//            }
-//        }
-//              Wallet searchUserWallet3 = searchWalletList.stream()
-//                .filter(wallet -> walletLogin.equals(wallet.walletLogin))
-//                .findAny()
-//                .orElse(null);
-
-//        Wallet searchUserWallet3 = searchWalletList.stream()
-//                .filter(wallet -> walletLogin.equals(wallet.walletLogin))
-//                .findAny()
-//                .orElse(null);
-        System.out.println("walet jednego uzytkownika: " + searchWalletList3.get(1).walletBalance);
-//        return searchUserWallet.walletBalance;
-//        return this.walletBalance = searchUserWallet3.walletBalance;
-        return 1;
+        return walletBalance;
     }
 
-//    public Wallet searchUserWallet() {
-////        wziete ze stronki https://www.baeldung.com/find-list-element-java
-////        Customer james = customers.stream()
-////                .filter(customer -> "James".equals(customer.getName()))
-////                .findAny()
-////                .orElse(null);
-//        List<Wallet> searchWalletList3 = readWalletDatabaseFile();
-//        Wallet searchUserWallet2 = (Wallet) searchWalletList3.stream()
-//                .filter(wallet -> walletLogin.equals(wallet.walletLogin));
-////                .findAny()
-////                .orElse(null);
-////        System.out.println(searchUserWallet);
-//        return searchUserWallet2;
-//    }
+    public List<Wallet> searchUserWallet(User user) {
+        List<Wallet> searchWalletList = readWalletDatabaseFile(); // wczytanie bazy danych do listy
+//        System.out.println("searchWalletList2: " + searchWalletList);
+
+        List<Wallet> userWallet = new ArrayList<>(); // ta zmienna zeby wartosc tego portfela byla w funkcji/zwaracla ja
+
+//        sortowanie po kazdym wierszu w liscie
+        for (int i = 0; i < searchWalletList.size(); i++) {
+//            if dla wybrania z wiersza jednej wartosci -> szukamy po walletLogin to wartosc w liscie a user login to wartosc zalogowanego usera
+            if (searchWalletList.get(i).walletLogin.equals(user.login)) {
+//                jesli nam znalazlo ten jeden wiersz to tworzymy nowy wallet z nowymi danymi (tutaj te dane pobrane z bazy danych) i na nim pozniej dzialamy
+                //przypisanie do glownej zmiennej wallet -> uzywamy tutaj creatora do stworzenia portfela dla danego uzytkownika
+                Wallet newWallet = createUserWallet(searchWalletList.get(i).walletBalance, searchWalletList.get(i).walletUserId, searchWalletList.get(i).walletLogin,
+                        searchWalletList.get(i).walletName, searchWalletList.get(i).walletSurname);
+//                System.out.println("User Wallet: " + newWallet);
+                userWallet.add(newWallet);
+            }
+        }
+//        System.out.println("User Wallet zwrocony z petli: " + userWallet);
+        return userWallet;
+    }
 
     public double checkWalletBalance () {
 //        System.out.println("Wallet balance: "+ wallet);
@@ -101,30 +64,18 @@ public class Wallet {
     }
 
     public void walletUpdate () throws IOException {
-        //        obliczanie nowej wartosci portfela
-        double updateWalletValue = setWallet() + enterWallet;
-//        this.walletBalance = updateWalletValue;
-//
-//        wczystanie bazy danych wszystkich uzytkownikow z bazy danych
-        List<Wallet> searchWalletList = readWalletDatabaseFile();
-//        System.out.println("stara zawartosc calej bazy \n" + searchWalletList);
-//
-//        znalezienie z tej listy jednego uzytkownika (jeden wpis/eden wiersz z listy)
-        Wallet searchUserWallet = searchWalletList.stream()
-                .filter(wallet -> walletLogin.equals(wallet.walletLogin))
-                .findAny()
-                .orElse(null);
-//        System.out.println("znaleziony jeden uzytkownik z bazy danych -> \n" + searchUserWallet);
+        double updateWalletValue = walletBalance + enterWallet; // obliczanie nowej wartosci portfela
+        this.walletBalance = updateWalletValue; // zapisanie do glownej zmiennej
+//        System.out.println("walletBallance w glownej zmiennej: " + walletBalance);
+        List<Wallet> searchWalletList = readWalletDatabaseFile(); //wczystanie bazy danych wszystkich uzytkownikow
+//        System.out.println("stara zawartosc calej bazy " + searchWalletList);
 
-//        zmiana wartosci portfela dla tego jednego uzytkownika
-        searchUserWallet.walletBalance = updateWalletValue;
-//        System.out.println("uzytkownik z nowa wartoscia portfela -> \n" + searchUserWallet);
-//        System.out.println("wartosc portfela PRZED update -> \n" + this.walletBalance);
-        this.walletBalance = updateWalletValue;
-//        System.out.println("wartosc portfela PO update -> \n" + this.walletBalance);
-//
-//        tworzenie listy uzytkownikow z uzytkownikiem ktory ma nowa wartosc portfela
-//        System.out.println("lista uzytkownikow z nowym portfelem -> \n" + searchWalletList);
+//        stworzenie nowej listy uzytkownikow (starzy + nowy)
+        for (int i = 0; i < searchWalletList.size(); i++) {
+            if (searchWalletList.get(i).walletLogin.equals(walletLogin)) {
+                searchWalletList.get(i).walletBalance = walletBalance; // zamienia wartosci
+            }
+        }
 
 //        zapisanie listy uzystkonikow w pliku
         FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
@@ -155,8 +106,4 @@ public class Wallet {
 
         return walletOutput;
     }
-//    public String toString() {
-//        return "Wallet: " + walletBalance + ", User ID: " + walletUserId + ", Login: " + walletLogin +
-//                ", Name: " + walletName + ", Surname: " + walletSurname;
-//    }
 }

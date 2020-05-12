@@ -29,6 +29,13 @@ public class User {
         this.userId = userId;
     }
 
+//    public User() {
+//        this.login = getLogin();
+//        this.name = getName();
+//        this.surname = getSurname();
+//        this.userId = getUserId();
+//    }
+
     public User(int userId, String login, String name, String surname) {
         this.login = login;
         this.name = name;

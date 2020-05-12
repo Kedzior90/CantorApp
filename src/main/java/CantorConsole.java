@@ -40,7 +40,7 @@ public class CantorConsole {
                                     display.displayTransaction();
                                     break;
                                 case 2:
-                                    display.displayChargeWallet();
+                                    display.displayWalletCharge();
                                     break;
                                 case 3:
                                     display.displayWalletBalance();
