@@ -29,32 +29,21 @@ public class Wallet {
 
     public int getUserID() {
         User user = new User();
-//        user.setUserId();
-//        System.out.println("user id");
         return walletUserId = user.userId;
     }
 
     public String getLogin() {
         User user = new User();
-//        user.setUserLogin();
-//        System.out.println("user.login: " + user.login);
-//        System.out.println("walletLogin: " + walletLogin);
         return walletLogin = user.login;
     }
 
     public String getName() {
         User user = new User();
-//        user.setName();
-//        user.setName();
-//        System.out.println("name");
         return walletName = user.name;
     }
 
     private String getSurname() {
         User user = new User();
-//        user.setSurname();
-//        User user = new User();
-//        return walletSurname = user.surname;
         return walletSurname = user.surname;
     }
 

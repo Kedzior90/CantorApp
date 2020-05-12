@@ -14,7 +14,6 @@ public class Trade {
     public double amount;
     public double rate;
     public double value;
-//    dodac zmienna z czasem tranzakcji
 
     public Trade(double amount, String currency1, String currency2, double rate, double value, String tradeDate) {
         this.amount = amount;
@@ -25,7 +24,8 @@ public class Trade {
         this.tradeDate = tradeDate;
     }
 
-    public Trade(){
+    public Trade() {
+
     }
 
     public void setCurrency1() {
