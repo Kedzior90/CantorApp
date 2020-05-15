@@ -3,11 +3,14 @@ package utils;
 import model.Transaction;
 import model.User;
 import model.Wallet;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Helper {
-
     Database database = new Database();
     String currentDate;
 
@@ -29,7 +32,7 @@ public class Helper {
     }
 
 //    szukanie wszystkich tranzakcji uzytkownika
-    public void searchUserInTransactionDatabase(User user, Transaction transaction) {
+    public void searchUserTransactions(User user, Transaction transaction) {
         List<Transaction> transactionList = database.readDatabaseFile(transaction);
         int k = 1;
         for (int i = 0; i < transactionList.size(); i++) {
@@ -40,6 +43,70 @@ public class Helper {
             }
     }
 
+    public List<Wallet> searchUserWallet(User user, Wallet wallet) {
+        List<Wallet> searchWalletList = database.readWalletDatabaseFile(); // wczytanie bazy danych do listy
+        List<Wallet> userWallet = new ArrayList<>(); // ta zmienna zeby wartosc tego portfela byla w funkcji/zwaracla ja
+//        Wallet wallet = new Wallet();
+        for (int i = 0; i < searchWalletList.size(); i++) {
+            if (searchWalletList.get(i).walletLogin.equals(user.login)) {
+                wallet.createUserWallet(searchWalletList.get(i).walletBalance, searchWalletList.get(i).walletUserId, searchWalletList.get(i).walletLogin,
+                        searchWalletList.get(i).walletName, searchWalletList.get(i).walletSurname);
+//                Wallet newWallet = createUserWallet(searchWalletList.get(i).walletBalance, searchWalletList.get(i).walletUserId, searchWalletList.get(i).walletLogin,
+//                        searchWalletList.get(i).walletName, searchWalletList.get(i).walletSurname);
+                userWallet.add(wallet);
+            }
+        }
+//        System.out.println("User Wallet zwrocony z petli: " + userWallet);
+        return userWallet;
+    }
+
+//    -----------------------------original ---------------------------
+//    public List<Wallet> searchUserWallet(User user) {
+//        List<Wallet> searchWalletList = database.readWalletDatabaseFile(); // wczytanie bazy danych do listy
+////        System.out.println("searchWalletList2: " + searchWalletList);
+//        List<Wallet> userWallet = new ArrayList<>(); // ta zmienna zeby wartosc tego portfela byla w funkcji/zwaracla ja
+//
+////        sortowanie po kazdym wierszu w liscie
+//        for (int i = 0; i < searchWalletList.size(); i++) {
+////            if dla wybrania z wiersza jednej wartosci -> szukamy po walletLogin to wartosc w liscie a user login to wartosc zalogowanego usera
+//            if (searchWalletList.get(i).walletLogin.equals(user.login)) {
+////                jesli nam znalazlo ten jeden wiersz to tworzymy nowy wallet z nowymi danymi (tutaj te dane pobrane z bazy danych) i na nim pozniej dzialamy
+//                //przypisanie do glownej zmiennej wallet -> uzywamy tutaj creatora do stworzenia portfela dla danego uzytkownika
+//                Wallet newWallet = createUserWallet(searchWalletList.get(i).walletBalance, searchWalletList.get(i).walletUserId, searchWalletList.get(i).walletLogin,
+//                        searchWalletList.get(i).walletName, searchWalletList.get(i).walletSurname);
+////                System.out.println("User Wallet: " + newWallet);
+//                userWallet.add(newWallet);
+//            }
+//        }
+////        System.out.println("User Wallet zwrocony z petli: " + userWallet);
+//        return userWallet;
+//    }
+
+//    public void walletUpdate () throws IOException {
+//        double updateWalletValue = walletBalance + enterWallet; // obliczanie nowej wartosci portfela
+//        this.walletBalance = updateWalletValue; // zapisanie do glownej zmiennej
+////        System.out.println("walletBallance w glownej zmiennej: " + walletBalance);
+//        List<Wallet> searchWalletList = readWalletDatabaseFile(); //wczystanie bazy danych wszystkich uzytkownikow
+////        System.out.println("stara zawartosc calej bazy " + searchWalletList);
+//
+////        stworzenie nowej listy uzytkownikow (starzy + nowy)
+//        for (int i = 0; i < searchWalletList.size(); i++) {
+//            if (searchWalletList.get(i).walletLogin.equals(walletLogin)) {
+//                searchWalletList.get(i).walletBalance = walletBalance; // zamienia wartosci
+//            }
+//        }
+//
+////        zapisanie listy uzystkonikow w pliku
+//        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
+//        PrintWriter printWriter = new PrintWriter(fileWriter);
+////        petla po to zeby mi w pliku zapisalo dobrze po przecinku
+//        for (int i = 0; i < searchWalletList.size(); i++) {
+//            printWriter.print(searchWalletList.get(i) + "\n");
+//        }
+//        printWriter.close();
+//    }
+
+//    ---------------------------------------------------------------------
 //    public void userListSortedById() {
 //        List<User> userId = readUserDatabaseFile();
 //        userId.sort( Comparator.comparing(user -> user.userId) );

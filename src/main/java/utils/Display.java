@@ -87,7 +87,7 @@ public class Display {
 
 //        zapisanie w bazach danych
         database.saveInDatabase(user);
-        wallet.saveNewUserInWalletDatabase(user);
+        database.saveNewUserInWalletDatabase(user);
 
         System.out.print("\n*********** Created User ***********\n");
         System.out.print("User ID:\t\t" + user.userId +
@@ -187,16 +187,15 @@ public class Display {
         System.out.print("\n************************************\n");
         System.out.print("\tTransaction Database file");
         System.out.print("\n************************************\n");
-        helper.searchUserInTransactionDatabase(user, transaction);
+        helper.searchUserTransactions(user, transaction);
     }
 
     public void displayWalletBalance() {
         System.out.print("\n************************************\n");
         System.out.print("\t*" + user.login + "* wallet balance");
         System.out.print("\n************************************\n");
-        user.setDataCreation();
-        System.out.println("Status on: \t\t" + user.getCreationDate());
-        wallet.searchUserWallet(user); // szukanie uzytkownika po loginie w bazie danych i tworzenie mu portfela na podstawie danych z bazy danych
+//        wallet.searchUserWallet(user); // szukanie uzytkownika po loginie w bazie danych i tworzenie mu portfela na podstawie danych z bazy danych
+        helper.searchUserWallet(user, wallet);
         System.out.println("Wallet Balance: " + wallet.walletBalance);
     }
 
@@ -204,10 +203,10 @@ public class Display {
         System.out.print("\n************************************\n");
         System.out.print("\t*" + user.login + "* charge wallet balance");
         System.out.print("\n************************************\n");
-        wallet.searchUserWallet(user); //tworzenie portfela zalagowanego uzytkownika
+        helper.searchUserWallet(user, wallet); //tworzenie portfela zalagowanego uzytkownika
         System.out.println("Enter Value: ");
         wallet.setEnterWallet();
-        wallet.walletUpdate();
+//        helper.walletUpdate();
 
         System.out.print("\n********** Wallet Status **********\n");
         System.out.print("Wallet balance: " + wallet.walletBalance +

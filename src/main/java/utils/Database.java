@@ -141,4 +141,41 @@ public class Database {
         return new Transaction(amount, currency1, currency2, rate, value, tradeDate, userId, login, name, surname); // create and return trade of this metadata
     }
 
+//    ----------------------------------88888888888888888888888888888888----------------------------------------
+
+    public void saveNewUserInWalletDatabase(User user) throws IOException {
+        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"), true);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print("0.0" + ", " + user.userId + ", " + user.login + ", " + user.name + ", " + user.surname + "\n");
+        printWriter.close();
+    }
+
+    static List<Wallet> readWalletDatabaseFile() {
+        List<Wallet> walletList = new ArrayList<>();
+        try {
+            File myObj = new File(System.getProperty("wallet.database"));
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] attributes = data.split(", ");
+                Wallet wallet = createWalletDatabase(attributes);
+                walletList.add(wallet);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return walletList;
+    }
+
+    private static Wallet createWalletDatabase(String[] metadata) {
+        double wallet = Double.parseDouble(metadata[0]);
+        int walletUserId = Integer.parseInt(metadata[1]);
+        String walletLogin = metadata[2];
+        String walletName = metadata[3];
+        String walletSurname = metadata[4];
+
+        return new Wallet(wallet, walletUserId, walletLogin, walletName, walletSurname);
+    }
 }
