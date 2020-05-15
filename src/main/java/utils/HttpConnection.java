@@ -12,11 +12,11 @@ import java.net.URL;
 //        https://api.exchangeratesapi.io/latest?base=USD
 
 public class HttpConnection {
+    double httpRate = 0;
 
     public double getHttpRate(String currency1, String currency2) throws IOException {
         String ratesHttpApi = System.getProperty("rate.http.api");
         String ulrForRates = ratesHttpApi + currency1;
-        double getRate;
 
         URL url = new URL(ulrForRates);
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
@@ -25,8 +25,8 @@ public class HttpConnection {
         JsonParser jp = new JsonParser();
         JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
         JsonObject jsonobj = (JsonObject) root.getAsJsonObject().get("rates");
-        getRate = jsonobj.get(currency2).getAsDouble();
+        httpRate = jsonobj.get(currency2).getAsDouble();
 
-        return getRate;
+        return this.httpRate;
     }
 }

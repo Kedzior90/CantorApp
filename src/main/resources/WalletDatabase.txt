@@ -6,3 +6,14 @@
 0.0, 1724, vcvb, hgf, n
 0.0, 6236, ahkj, jbh, jn
 0.0, 1650, ds, vxbcv, bdfg
+0.0, 8825, a, a, a
+0.0, 2441, a, a, a
+0.0, 1251, b, b, b
+0.0, 8635, sad, fvcb, dfg
+0.0, 1736, r, r, r
+0.0, 8943, dfsd, xcv, sdfg
+0.0, 75, t, t, t
+0.0, 739, q, q, q
+0.0, 5679, dsf, cvx, dfg
+0.0, 8778, afsdfsd, cxv, dfg
+0.0, 8039, sad, c, xzcv

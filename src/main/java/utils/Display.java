@@ -1,6 +1,6 @@
 package utils;
 
-import model.Trade;
+import model.Transaction;
 import model.User;
 import model.Wallet;
 
@@ -8,10 +8,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class Display {
-    public static User user = new User();
-    public static Trade trade = new Trade();
-    public static Database database = new Database();
-    public static Wallet wallet = new Wallet();
+    public User user = new User();
+    private User transactionUser = new Transaction();
+    public Transaction transaction = new Transaction();
+    public Database database = new Database();
+    public Wallet wallet = new Wallet();
 
     public void displayMainMenu() {
         System.out.print("\n************************************\n");
@@ -24,114 +25,115 @@ public class Display {
         System.out.print("0. Exit");
         System.out.print("\n************************************\n");
     }
-//    public void displayWalletMenu() {
-//        System.out.print("\n************************************\n");
-//        System.out.print("\t\t\t" + wallet.walletLogin + " wallet");
-//        System.out.print("\n************************************\n");
-//        System.out.print("1. Display Wallet Balance\n");
-//        System.out.print("2. Charge Wallet\n");
-//        System.out.print("9. <- Back Menu\n");
-//        System.out.print("\n************************************\n");
-//    }
+
     public void displayUserRegister() throws IOException {
         System.out.print("\n************************************\n");
         System.out.print("\t\t\tRegister User");
         System.out.print("\n************************************\n");
-        user.setUserLogin(); // System.out.print("Enter User Login: ");
-        user.setName(); // System.out.print("Enter User Name: ");
-        user.setSurname(); // System.out.print("Enter User Surname: ");
-        user.setPassword(); // System.out.print("Enter User Password: ");
-        user.setEmailAddress(); // System.out.print("Enter Email Address: ");
+        user.setLogin();
+        user.setName();
+        user.setSurname();
+        user.setPassword();
         user.setUserId();
         user.setDataCreation();
-        database.saveUserInDatabase(user);
-        wallet.saveNewUserInWalletDatabase(user);
+//        database.saveUserInDatabase(user);
+        database.saveInDatabase(user);
+
+//        sprawdzic czy dziala
+//        wallet.saveNewUserInWalletDatabase(user);
 
         System.out.print("\n*********** Created User ***********\n");
-        System.out.print("User ID:\t\t" + user.getUserId() +
-                "\nLogin:\t\t\t" + user.getLogin() +
-                "\nUser Name:\t\t" + user.getName() +
-                "\nUser Surname:\t" + user.getSurname() +
-                "\nEmail Address:\t" + user.getEmailAddress() +
-                "\nCreation Date:\t" + user.getCreationDate());
+        System.out.print("User ID:\t\t" + user.userId +
+                "\nLogin:\t\t\t" + user.login +
+                "\nUser Name:\t\t" + user.name +
+                "\nUser Surname:\t" + user.surname +
+                "\nCreation Date:\t" + user.creationDate);
         System.out.print("\n************************************\n");
-    }
-
-    public boolean displayLogin() {
-        System.out.print("\n************************************\n");
-        System.out.print("\t\t\tLogin");
-        System.out.print("\n************************************\n");
-        user.setUserLogin(); // System.out.print("Enter User Login: ");
-        user.setPassword(); // System.out.print("Enter User Password: ");
-        if (database.loginChecker(user.login, user.password) == true) {
-            System.out.println("\tLogin accepted");
-        } else {
-            System.out.println("\tWrong login/password");
-        }
-
-        return database.loginChecker(user.login, user.password);
-    }
-
-    public void displayCheckRates () throws IOException {
-        System.out.print("\n************************************\n");
-        System.out.print("\t\t\tCheck Rates");
-        System.out.print("\n************************************\n");
-        trade.setTradeDate();
-        System.out.print("Today is: " + trade.getTradeDate());
-
-        System.out.println("\nEnter currency1: ");
-        trade.setCurrency1();
-
-        System.out.println("Enter currency2: ");
-        trade.setCurrency2();
-
-        trade.setRate(trade.getCurrency1(), trade.getCurrency2());
-        System.out.println("Rate: " + trade.getRate());
     }
 
     public void displayTransaction() throws IOException {
         System.out.print("\n************************************\n");
         System.out.print("\t\t\tTransaction");
         System.out.print("\n************************************\n");
+        transaction.setAmount();
+        transaction.setCurrency1();
+        transaction.setCurrency2();
 
-        System.out.print("Enter currency1: ");
-        trade.setCurrency1();
+//        obliczanie kursu waluty
+        transaction.setRate(transaction.getCurrency1(), transaction.getCurrency2());
 
-        System.out.print("Enter currency2: ");
-        trade.setCurrency2();
+//        obliczanie wartosci wymiany
+        transaction.setValue(transaction.getRate(), transaction.getAmount());
 
-        System.out.print("Enter amount: ");
-        trade.setAmount();
+//        ustalanie daty tranzakcji
+        transaction.setTradeDate();
 
-        trade.setRate(trade.getCurrency1(), trade.getCurrency2());
-        trade.setValue(trade.getRate(), trade.getAmount());
-        trade.setTradeDate();
-        database.saveTradeInDatabase(trade);
+//        zapisanie tranzakcji w bazie danych
+//        database.saveTransactionInDatabase(transaction, user);
+        database.saveInDatabase(user, transaction);
 
         System.out.print("\n********* Transaction data *********\n");
-        System.out.print("TradeDate: " + trade.getTradeDate() +
-                        "\nCurrency1:\t" + trade.getCurrency1() +
-                        "\nCurrency2:\t" + trade.getCurrency2() +
-                        "\nAmount:\t" + trade.getAmount() +
-                        "\nRate:\t" + trade.getRate() +
-                        "\nValue:\t" + trade.getValue());
+        System.out.print("TradeDate:\t" + transaction.tradeDate +
+                "\nAmount:\t\t" + transaction.amount +
+                "\nCurrency1:\t" + transaction.currency1 +
+                "\nCurrency2:\t" + transaction.currency2 +
+                "\nRate:\t\t" + transaction.rate +
+                "\nUser ID:\t" + user.userId +
+                "\nLogin:\t\t" + user.login +
+                "\nName:\t\t" + user.name +
+                "\nSurname:\t" + user.surname);
+
         System.out.print("\n************************************\n");
     }
 
-    public void displayUserMenu() {
-        System.out.print("\n************************************\n");
-        System.out.print("\t\t\tUser Menu");
-        System.out.print("\n************************************\n");
-        System.out.print("\t\tWelcome: " + user.login + "\n");
-        System.out.print("1. Transaction\n");
-        System.out.print("2. Charge Wallet\n");
-        System.out.print("3. Display Wallet's Balance\n");
-        System.out.print("4. Display User's Database\n");
-        System.out.print("5. Display Trade's Database\n");
-        System.out.print("6. Display Transaction's Database -> TO DO\n");
-        System.out.print("9. <- Back Menu\n");
-        System.out.print("\n************************************\n");
-    }
+//    public boolean displayLogin() {
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t\t\tLogin");
+//        System.out.print("\n************************************\n");
+//        user.setUserLogin(); // System.out.print("Enter User Login: ");
+//        user.setPassword(); // System.out.print("Enter User Password: ");
+//        if (database.loginChecker(user.login, user.password) == true) {
+//            System.out.println("\tLogin accepted");
+//        } else {
+//            System.out.println("\tWrong login/password");
+//        }
+//
+//        return database.loginChecker(user.login, user.password);
+//    }
+
+//    public void displayCheckRates () throws IOException {
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t\t\tCheck Rates");
+//        System.out.print("\n************************************\n");
+//        transaction.setTradeDate();
+//        System.out.print("Today is: " + transaction.getTradeDate());
+//
+//        System.out.println("\nEnter currency1: ");
+//        transaction.setCurrency1();
+//
+//        System.out.println("Enter currency2: ");
+//        transaction.setCurrency2();
+//
+//        transaction.setRate(transaction.getCurrency1(), transaction.getCurrency2());
+//        System.out.println("Rate: " + transaction.getRate());
+//    }
+
+
+
+//    public void displayUserMenu() {
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t\t\tUser Menu");
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t\tWelcome: " + user.login + "\n");
+//        System.out.print("1. Transaction\n");
+//        System.out.print("2. Charge Wallet\n");
+//        System.out.print("3. Display Wallet's Balance\n");
+//        System.out.print("4. Display User's Database\n");
+//        System.out.print("5. Display Trade's Database\n");
+//        System.out.print("6. Display Transaction's Database -> TO DO\n");
+//        System.out.print("9. <- Back Menu\n");
+//        System.out.print("\n************************************\n");
+//    }
 
 //    public void displayUserMenu() {
 //        System.out.print("\n************************************\n");
@@ -151,55 +153,58 @@ public class Display {
 //        System.out.print("\n************************************\n");
 //    }
 
-    public void displayTradeFile() {
+    public void displayTransactionDatabaseFile() {
         System.out.print("\n************************************\n");
-        System.out.print("\t\tTrade Database file");
+        System.out.print("\t\tTransaction Database file");
         System.out.print("\n************************************\n");
-        List<Trade> tradeList = database.readTradeDatabaseFile();
+//        List<Transaction> transactionList = database.readTransactionDatabaseFile();
+        List<Transaction> transactionList = database.readDatabaseFile(transaction);
 
         int k = 1;
-        for (int i = 0; i < tradeList.size(); i++) {
-            System.out.println("ID: " + k + ", " + tradeList.get(i));
+        for (int i = 0; i < transactionList.size(); i++) {
+            System.out.println("ID: " + k + ", " + transactionList.get(i));
             k++;
         }
     }
 
-    public void displayWalletBalance() {
-        System.out.print("\n************************************\n");
-        System.out.print("\t*" + user.login + "* wallet balance");
-        System.out.print("\n************************************\n");
-        user.setDataCreation();
-        System.out.println("Status on: \t\t" + user.getCreationDate());
-        wallet.searchUserWallet(user); // szukanie uzytkownika po loginie w bazie danych i tworzenie mu portfela na podstawie danych z bazy danych
-        System.out.println("Wallet Balance: " + wallet.walletBalance);
-    }
+//    public void displayWalletBalance() {
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t*" + user.login + "* wallet balance");
+//        System.out.print("\n************************************\n");
+//        user.setDataCreation();
+//        System.out.println("Status on: \t\t" + user.getCreationDate());
+//        wallet.searchUserWallet(user); // szukanie uzytkownika po loginie w bazie danych i tworzenie mu portfela na podstawie danych z bazy danych
+//        System.out.println("Wallet Balance: " + wallet.walletBalance);
+//    }
 
-    public void displayWalletCharge() throws IOException {
-        System.out.print("\n************************************\n");
-        System.out.print("\t*" + user.login + "* charge wallet balance");
-        System.out.print("\n************************************\n");
-        wallet.searchUserWallet(user); //tworzenie portfela zalagowanego uzytkownika
-        System.out.println("Enter Value: ");
-        wallet.setEnterWallet();
-        wallet.walletUpdate();
-
-        System.out.print("\n********** Wallet Status **********\n");
-        System.out.print("Wallet balance: " + wallet.walletBalance +
-                "\nLogin:\t\t\t" + wallet.walletLogin +
-                "\nName:\t\t\t" + wallet.walletName +
-                "\nSurname:\t\t" + wallet.walletSurname);
-        System.out.print("\n************************************\n");
-    }
+//    public void displayWalletCharge() throws IOException {
+//        System.out.print("\n************************************\n");
+//        System.out.print("\t*" + user.login + "* charge wallet balance");
+//        System.out.print("\n************************************\n");
+//        wallet.searchUserWallet(user); //tworzenie portfela zalagowanego uzytkownika
+//        System.out.println("Enter Value: ");
+//        wallet.setEnterWallet();
+//        wallet.walletUpdate();
+//
+//        System.out.print("\n********** Wallet Status **********\n");
+//        System.out.print("Wallet balance: " + wallet.walletBalance +
+//                "\nLogin:\t\t\t" + wallet.walletLogin +
+//                "\nName:\t\t\t" + wallet.walletName +
+//                "\nSurname:\t\t" + wallet.walletSurname);
+//        System.out.print("\n************************************\n");
+//    }
 
     public void displayUserDatabaseFile() {
         System.out.print("\n************************************\n");
         System.out.print("\t\tUsers Database file");
         System.out.print("\n************************************\n");
-        List<User> usersList = database.readUserDatabaseFile();
+//        List<User> usersList = database.readUserDatabaseFile();
+        List<User> usersList = database.readDatabaseFile(user);
+
 
         int k = 1;
         for (int i = 0; i < usersList.size(); i++) {
-            System.out.println("ID: " + k + ", " + usersList.get(i));
+            System.out.println("ID: " + k + ", " + usersList.get(i).toString());
             k++;
         }
     }
@@ -208,42 +213,35 @@ public class Display {
         System.out.print("\n************************************\n");
         System.out.print("\t\tUsers List Sorted by User ID");
         System.out.print("\n************************************\n");
-        database.userListSortedById();
+//        database.userListSortedById();
     }
 
     public void displayUserListSortedByLogin() {
         System.out.print("\n************************************\n");
         System.out.print("\t\tUsers List Sorted by Login");
         System.out.print("\n************************************\n");
-        database.userListSortedByLogin();
+//        database.userListSortedByLogin();
     }
 
     public void displayUserListSortedByName() {
         System.out.print("\n************************************\n");
         System.out.print("\t\tUsers List Sorted by Name");
         System.out.print("\n************************************\n");
-        database.userListSortedByName();
+//        database.userListSortedByName();
     }
 
     public void displayUserListSortedBySurname() {
         System.out.print("\n************************************\n");
         System.out.print("\t\tUsers List Sorted by Surname");
         System.out.print("\n************************************\n");
-        database.userListSortedBySurname();
-    }
-
-    public void displayUserListSortedByEmailAddress() {
-        System.out.print("\n************************************\n");
-        System.out.print("\t\tUsers List Sorted by Email Address");
-        System.out.print("\n************************************\n");
-        database.userListSortedByEmailAddress();
+//        database.userListSortedBySurname();
     }
 
     public void displayUserListSortedByCreationDate() {
         System.out.print("\n************************************\n");
         System.out.print("\t\tUsers List Sorted by Creation Date");
         System.out.print("\n************************************\n");
-        database.userListSortedByCreationDate();
+//        database.userListSortedByCreationDate();
     }
 
     public void displayTest (){

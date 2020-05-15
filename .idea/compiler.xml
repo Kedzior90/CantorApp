@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CantorApp" target="8" />
+      <module name="CantorApp" target="11" />
       <module name="CantorAppProject" target="8" />
     </bytecodeTargetLevel>
   </component>

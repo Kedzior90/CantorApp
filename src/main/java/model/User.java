@@ -6,25 +6,23 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
-// ciekawy projekt do podpatrzenia https://www.journaldev.com/2315/java-json-example
-// listy artyhul https://www.geeksforgeeks.org/arrays-sort-in-java-with-examples/
-// stronka jak odczytac plik https://www.java67.com/2015/08/how-to-load-data-from-csv-file-in-java.html
+//to jest dobre https://www.javappa.com/kurs-java/wlasne-obiekty
+//stronka jak odczytac plik https://www.java67.com/2015/08/how-to-load-data-from-csv-file-in-java.html
 
 public class User {
+    public int userId;
     public String login;
     public String name;
     public String surname;
-    public String emailAddress;
     public String password;
     public String creationDate;
-    public int userId;
 
-    public User(int userId, String login, String name, String surname, String password, String emailAddress, String creationDate) {
+//    konstruktor potrzebny do stworzenia obiektu z UserDatabase
+    public User(int userId, String login, String name, String surname, String password, String creationDate) {
         this.login = login;
         this.name = name;
         this.surname = surname;
         this.password = password;
-        this.emailAddress = emailAddress;
         this.creationDate = creationDate;
         this.userId = userId;
     }
@@ -32,7 +30,7 @@ public class User {
     public User() {
     }
 
-    public void setUserLogin () {
+    public void setLogin() {
         System.out.print("Enter Login: ");
         Scanner scan = new Scanner(System.in);
         this.login = scan.nextLine();
@@ -72,16 +70,6 @@ public class User {
         return password;
     }
 
-    public void setEmailAddress (){
-        System.out.print("Enter Email Address: ");
-        Scanner scan = new Scanner(System.in);
-        this.emailAddress = scan.nextLine();
-    }
-
-    public String getEmailAddress () {
-        return emailAddress;
-    }
-
     public void setDataCreation (){
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
@@ -105,7 +93,6 @@ public class User {
     public String toString(){
         return "User ID: " + userId + ", Login: " + login +
                 ", Name: " + name + ", Surname: " + surname +
-                ", Password: " + password + ", Email Address: " + emailAddress +
-                ", Creation Date: " + creationDate;
+                ", Password: " + password + ", Creation Date: " + creationDate;
     }
 }

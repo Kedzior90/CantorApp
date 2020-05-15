@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class ConfigurationLoader {
     private Properties properties = new Properties();
-    private String configuration = "src\\main\\resources\\Configuration.properties";
+    private String configuration = "src/main/resources/Configuration.properties";
 
     public void loadProperties() throws FileNotFoundException {
         InputStream configurationStream = new FileInputStream(configuration);
