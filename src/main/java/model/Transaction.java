@@ -90,6 +90,23 @@ public class Transaction extends User {
         return tradeDate;
     }
 
+//    public Transaction createUserTransaction(double amount, String currency1, String currency2, double rate,
+//                                              double value, String tradeDate, int userId, String login,
+//                                              String name, String surname) {
+//        this.amount = amount;
+//        this.currency1 = currency1;
+//        this.currency2 = currency2;
+//        this.rate = rate;
+//        this.value = value;
+//        this.tradeDate = tradeDate;
+//        this.userId = userId;
+//        this.login = login;
+//        this.name = name;
+//        this.surname = surname;
+//
+//        return new Transaction(amount, currency1, currency2, rate, value, tradeDate, userId, login, name,surname);
+//    }
+
 //    nie wiem czy dziala do sprawdzenia
 //    @Override
 //    public int getUserId() {

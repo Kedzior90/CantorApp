@@ -1,11 +1,33 @@
 package utils;
 
+import model.Transaction;
+import model.User;
+import model.Wallet;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Helper {
+
+    Database database = new Database();
     String currentDate;
 
     public Helper(){
 
     }
+
+    public List<User> searchUser(User user) {
+        List<User> searchUserList = database.readDatabaseFile(user);
+        List<User> newUser = new ArrayList<>();
+
+        for (int i = 0; i < searchUserList.size(); i++) {
+            if (searchUserList.get(i).login.equals(user.login)) {
+                user.createUser(searchUserList.get(i).userId, searchUserList.get(i).login, searchUserList.get(i).name, searchUserList.get(i).surname);
+                newUser.add(user);
+            }
+        }
+        return newUser;
+    }
+
 
 //    public void userListSortedById() {
 //        List<User> userId = readUserDatabaseFile();

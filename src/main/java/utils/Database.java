@@ -2,6 +2,8 @@ package utils;
 
 import model.Transaction;
 import model.User;
+import model.Wallet;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -90,7 +92,6 @@ public class Database {
 
     public boolean loginChecker(String inputLogin, String inputPass) {
         boolean login = false;
-
         try {
             File myObj = new File(System.getProperty("user.database"));
             Scanner myReader = new Scanner(myObj);
@@ -99,6 +100,7 @@ public class Database {
                 String[] attributes = data.split(", ");
                 User user = createDatabaseUser(attributes);
                 if (user.login.equals(inputLogin) && user.password.equals(inputPass)) {
+
                     login = true;
                     break;
                 }
@@ -138,4 +140,5 @@ public class Database {
 
         return new Transaction(amount, currency1, currency2, rate, value, tradeDate, userId, login, name, surname); // create and return trade of this metadata
     }
+
 }

@@ -27,6 +27,14 @@ public class User {
         this.userId = userId;
     }
 
+//    potrzebny do login
+    public User(int userId, String login, String name, String surname) {
+        this.userId = userId;
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+    }
+
     public User() {
     }
 
@@ -88,6 +96,16 @@ public class User {
 
     public int getUserId (){
         return userId;
+    }
+
+//    to jest potrebne do stworzenia uzytkjownika po zalogowaniu
+    public User createUser(int userId, String login, String name, String surname) {
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.userId = userId;
+
+        return new User(userId, login, name, surname);
     }
 
     public String toString(){

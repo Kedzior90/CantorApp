@@ -9,10 +9,11 @@ public class CantorConsole {
     public static void main(String[] args) throws IOException {
         configurationLoader.loadProperties();
 
-        display.displayUserRegister();
-        display.displayUserDatabaseFile();
-        display.displayTransaction();
-        display.displayTransactionDatabaseFile();
+//        display.displayUserRegister();
+//        display.displayUserDatabaseFile();
+//        display.displayTransaction();
+//        display.displayTransactionDatabaseFile();
+        display.displayCantorRunner();
 
 //        todo przeniesc do Display class
 //        int value;
