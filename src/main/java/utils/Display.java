@@ -3,7 +3,6 @@ package utils;
 import model.Transaction;
 import model.User;
 import model.Wallet;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -84,9 +83,7 @@ public class Display {
         user.setPassword();
         user.setUserId();
         user.setDataCreation();
-
-//        zapisanie w bazach danych
-        database.saveInDatabase(user);
+        database.saveInDatabase(user); // zapisanie w bazach danych
         database.saveNewUserInWalletDatabase(user);
 
         System.out.print("\n*********** Created User ***********\n");
@@ -105,19 +102,10 @@ public class Display {
         transaction.setAmount();
         transaction.setCurrency1();
         transaction.setCurrency2();
-
-//        obliczanie kursu waluty
-        transaction.setRate(transaction.getCurrency1(), transaction.getCurrency2());
-
-//        obliczanie wartosci wymiany
-        transaction.setValue(transaction.getRate(), transaction.getAmount());
-
-//        ustalanie daty tranzakcji
-        transaction.setTradeDate();
-
-//        zapisanie tranzakcji w bazie danych
-//        database.saveTransactionInDatabase(transaction, user);
-        database.saveInDatabase(user, transaction);
+        transaction.setRate(transaction.getCurrency1(), transaction.getCurrency2()); // obliczanie kursu waluty
+        transaction.setValue(transaction.getRate(), transaction.getAmount()); // obliczanie wartosci wymiany
+        transaction.setTradeDate(); // ustalanie daty tranzakcji
+        database.saveInDatabase(user, transaction); //zapisanie tranzakcji w bazie danych
 
         System.out.print("\n********* Transaction data *********\n");
         System.out.print("TradeDate:\t" + transaction.tradeDate +
@@ -129,7 +117,6 @@ public class Display {
                 "\nLogin:\t\t" + user.login +
                 "\nName:\t\t" + user.name +
                 "\nSurname:\t" + user.surname);
-
         System.out.print("\n************************************\n");
     }
 
@@ -142,8 +129,7 @@ public class Display {
         boolean login = false;
 
         if (database.loginChecker(user.login, user.password) == true) {
-//            zeby utowrzyc obiekt user z danych z bazy danych o userDatabase
-            helper.searchUserInUserDatabase(user);
+            helper.searchUserInUserDatabase(user); // zeby utowrzyc obiekt user z danych z bazy danych o userDatabase
             login = true;
             System.out.println("\tLogin accepted");
         } else {
@@ -159,15 +145,10 @@ public class Display {
         System.out.print("\n************************************\n");
         transaction.setTradeDate();
         System.out.print("Today is: " + transaction.getTradeDate());
-
-        System.out.println("\nEnter currency1: ");
         transaction.setCurrency1();
-
-        System.out.println("Enter currency2: ");
         transaction.setCurrency2();
-
         transaction.setRate(transaction.getCurrency1(), transaction.getCurrency2());
-        System.out.println("Rate: " + transaction.getRate());
+        System.out.println("Rate:\t\t" + transaction.getRate());
     }
 
     public void displayUserMenu() {
@@ -182,7 +163,7 @@ public class Display {
         System.out.print("9. <- Back Menu\n");
         System.out.print("\n************************************\n");
     }
-    ;
+
     public void displayTransactionDatabaseFile() {
         System.out.print("\n************************************\n");
         System.out.print("\tTransaction Database file");
@@ -194,8 +175,7 @@ public class Display {
         System.out.print("\n************************************\n");
         System.out.print("\t*" + user.login + "* wallet balance");
         System.out.print("\n************************************\n");
-//        wallet.searchUserWallet(user); // szukanie uzytkownika po loginie w bazie danych i tworzenie mu portfela na podstawie danych z bazy danych
-        helper.searchUserWallet(user, wallet);
+        helper.searchUserWallet(user, wallet); // szukanie uzytkownika po loginie w bazie danych i tworzenie mu portfela na podstawie danych z bazy danych
         System.out.println("Wallet Balance: " + wallet.walletBalance);
     }
 
@@ -204,15 +184,14 @@ public class Display {
         System.out.print("\t*" + user.login + "* charge wallet balance");
         System.out.print("\n************************************\n");
         helper.searchUserWallet(user, wallet); //tworzenie portfela zalagowanego uzytkownika
-        System.out.println("Enter Value: ");
         wallet.setEnterWallet();
-//        helper.walletUpdate();
+        helper.walletUpdate(wallet);
 
         System.out.print("\n********** Wallet Status **********\n");
         System.out.print("Wallet balance: " + wallet.walletBalance +
-                "\nLogin:\t\t\t" + wallet.walletLogin +
-                "\nName:\t\t\t" + wallet.walletName +
-                "\nSurname:\t\t" + wallet.walletSurname);
+                "\nLogin:\t\t\t" + user.login +
+                "\nName:\t\t\t" + user.name +
+                "\nSurname:\t\t" + user.surname);
         System.out.print("\n************************************\n");
     }
 
@@ -220,7 +199,6 @@ public class Display {
         System.out.print("\n************************************\n");
         System.out.print("\t\tUsers Database file");
         System.out.print("\n************************************\n");
-//        List<User> usersList = database.readUserDatabaseFile();
         List<User> usersList = database.readDatabaseFile(user);
 
         int k = 1;

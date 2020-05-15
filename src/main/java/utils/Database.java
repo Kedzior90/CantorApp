@@ -3,7 +3,6 @@ package utils;
 import model.Transaction;
 import model.User;
 import model.Wallet;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,7 +10,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class Database {
 //    przeciazanie metod
@@ -41,13 +39,21 @@ public class Database {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
-////        stare w razie czego
-//        FileWriter fileWriter = new FileWriter(System.getProperty("transaction.database"), true);
-//        PrintWriter printWriter = new PrintWriter(fileWriter);
-//        printWriter.print(transaction.amount + ", " + transaction.currency1 + ", " + transaction.currency2 + ", " +
-//                transaction.rate + ", " + transaction.value + ", " + transaction.tradeDate + ", " +
-//                user.userId + ", " + user.login + ", " + user.name + ", " + user.surname + "\n");
-//        printWriter.close();
+    }
+
+//    nie uzywana na razie
+    public void saveInDatabase(User user, Wallet wallet) throws IOException {
+        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"), true);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print(wallet.walletBalance + ", " + user.userId + ", " + user.login + ", " + user.name + ", " + user.surname + "\n");
+        printWriter.close();
+    }
+
+    public void saveNewUserInWalletDatabase(User user) throws IOException {
+        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"), true);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print("0.0" + ", " + user.userId + ", " + user.login + ", " + user.name + ", " + user.surname + "\n");
+        printWriter.close();
     }
 
     public List<User> readDatabaseFile(User user) {
@@ -88,6 +94,26 @@ public class Database {
             e.printStackTrace();
         }
         return transactionList;
+    }
+
+    public List<Wallet> readDatabaseFile(Wallet wallet) {
+        List<Wallet> walletList = new ArrayList<>();
+
+        try {
+            File myObj = new File(System.getProperty("wallet.database"));
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] attributes = data.split(", ");
+                wallet = createWalletDatabase(attributes);
+                walletList.add(wallet);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return walletList;
     }
 
     public boolean loginChecker(String inputLogin, String inputPass) {
@@ -139,34 +165,6 @@ public class Database {
         String surname = metadata[9];
 
         return new Transaction(amount, currency1, currency2, rate, value, tradeDate, userId, login, name, surname); // create and return trade of this metadata
-    }
-
-//    ----------------------------------88888888888888888888888888888888----------------------------------------
-
-    public void saveNewUserInWalletDatabase(User user) throws IOException {
-        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"), true);
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print("0.0" + ", " + user.userId + ", " + user.login + ", " + user.name + ", " + user.surname + "\n");
-        printWriter.close();
-    }
-
-    static List<Wallet> readWalletDatabaseFile() {
-        List<Wallet> walletList = new ArrayList<>();
-        try {
-            File myObj = new File(System.getProperty("wallet.database"));
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                String[] attributes = data.split(", ");
-                Wallet wallet = createWalletDatabase(attributes);
-                walletList.add(wallet);
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        return walletList;
     }
 
     private static Wallet createWalletDatabase(String[] metadata) {

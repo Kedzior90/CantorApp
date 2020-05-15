@@ -90,45 +90,6 @@ public class Transaction extends User {
         return tradeDate;
     }
 
-    //    to jest potrebne do stworzenia tranzakcji zalogowanego uzytkownika
-    public Transaction createUserTransaction(double amount, String currency1, String currency2, double rate,
-                                              double value, String tradeDate, int userId, String login,
-                                              String name, String surname) {
-        this.amount = amount;
-        this.currency1 = currency1;
-        this.currency2 = currency2;
-        this.rate = rate;
-        this.value = value;
-        this.tradeDate = tradeDate;
-        this.userId = userId;
-        this.login = login;
-        this.name = name;
-        this.surname = surname;
-
-        return new Transaction(amount, currency1, currency2, rate, value, tradeDate, userId, login, name,surname);
-    }
-
-//    nie wiem czy dziala do sprawdzenia
-//    @Override
-//    public int getUserId() {
-//        return super.getUserId();
-//    }
-//
-//    @Override
-//    public String getLogin() {
-//        return super.getLogin();
-//    }
-//
-//    @Override
-//    public String getName() {
-//        return super.getName();
-//    }
-//
-//    @Override
-//    public String getSurname() {
-//        return super.getSurname();
-//    }
-
     public String toString(){
         return "Amount: " + amount + ", Currency1: " + currency1 + ", Currency2: " + currency2 +
                 ", Rate: " + rate + ", Value: " + value + ", TradeDate: " + tradeDate +
