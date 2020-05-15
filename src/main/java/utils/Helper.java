@@ -15,7 +15,7 @@ public class Helper {
 
     }
 
-    public List<User> searchUser(User user) {
+    public List<User> searchUserInUserDatabase(User user) {
         List<User> searchUserList = database.readDatabaseFile(user);
         List<User> newUser = new ArrayList<>();
 
@@ -28,6 +28,17 @@ public class Helper {
         return newUser;
     }
 
+//    szukanie wszystkich tranzakcji uzytkownika
+    public void searchUserInTransactionDatabase(User user, Transaction transaction) {
+        List<Transaction> transactionList = database.readDatabaseFile(transaction);
+        int k = 1;
+        for (int i = 0; i < transactionList.size(); i++) {
+            if (transactionList.get(i).login.equals(user.login)) {
+                    System.out.println("ID: " + k + ", " + transactionList.get(i));
+                    k++;
+                }
+            }
+    }
 
 //    public void userListSortedById() {
 //        List<User> userId = readUserDatabaseFile();

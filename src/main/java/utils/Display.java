@@ -5,7 +5,6 @@ import model.User;
 import model.Wallet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -47,20 +46,7 @@ public class Display {
                                     displayWalletBalance();
                                     break;
                                 case 4:
-                                    displayUserDatabaseFile();
-                                    break;
-                                case 5:
                                     displayTransactionDatabaseFile();
-                                    break;
-                                case 6:
-//                                    do zrobienia
-//                                    System.out.print("1. Transaction\n");
-//                                    System.out.print("2. Charge Wallet\n");
-//                                    System.out.print("3. Display Wallet's Balance\n");
-//                                    System.out.print("4. Display User's Database\n");
-//                                    System.out.print("5. Display Trade's Database\n");
-//                                    System.out.print("6. Display Transaction's Database -> TO DO\n");
-//                                    System.out.print("9. <- Back Menu\n");
                                     break;
                             }
                         } while (value!=9);
@@ -98,11 +84,10 @@ public class Display {
         user.setPassword();
         user.setUserId();
         user.setDataCreation();
-//        database.saveUserInDatabase(user);
-        database.saveInDatabase(user);
 
-//        sprawdzic czy dziala
-//        wallet.saveNewUserInWalletDatabase(user);
+//        zapisanie w bazach danych
+        database.saveInDatabase(user);
+        wallet.saveNewUserInWalletDatabase(user);
 
         System.out.print("\n*********** Created User ***********\n");
         System.out.print("User ID:\t\t" + user.userId +
@@ -158,7 +143,7 @@ public class Display {
 
         if (database.loginChecker(user.login, user.password) == true) {
 //            zeby utowrzyc obiekt user z danych z bazy danych o userDatabase
-            helper.searchUser(user);
+            helper.searchUserInUserDatabase(user);
             login = true;
             System.out.println("\tLogin accepted");
         } else {
@@ -193,43 +178,16 @@ public class Display {
         System.out.print("1. Transaction\n");
         System.out.print("2. Charge Wallet\n");
         System.out.print("3. Display Wallet's Balance\n");
-        System.out.print("4. Display User's Database\n");
-        System.out.print("5. Display Trade's Database\n");
-        System.out.print("6. Display Transaction's Database -> TO DO\n");
+        System.out.print("4. Display User's transactions\n");
         System.out.print("9. <- Back Menu\n");
         System.out.print("\n************************************\n");
     }
-
-//    public void displayUserMenu() {
-//        System.out.print("\n************************************\n");
-//        System.out.print("\t\t\tUser Menu");
-//        System.out.print("\n************************************\n");
-//        System.out.print("\t\tWelcome: " + user.login + "\n");
-//        System.out.print("1. Transaction\n");
-//        System.out.print("2. Display Trade's Database\n");
-//        System.out.print("3. Display User's Database\n");
-//        System.out.print("4. Display Users' sorted by ID\n");
-//        System.out.print("5. Display Users' sorted by Login\n");
-//        System.out.print("6. Display Users' sorted by Name\n");
-//        System.out.print("7. Display Users' sorted by Surname\n");
-//        System.out.print("8. Display Users' sorted by Email Address\n");
-//        System.out.print("9. Display Users' sorted by Creation date\n");
-//        System.out.print("10. <- Back Menu\n");
-//        System.out.print("\n************************************\n");
-//    }
-
+    ;
     public void displayTransactionDatabaseFile() {
         System.out.print("\n************************************\n");
-        System.out.print("\t\tTransaction Database file");
+        System.out.print("\tTransaction Database file");
         System.out.print("\n************************************\n");
-//        List<Transaction> transactionList = database.readTransactionDatabaseFile();
-        List<Transaction> transactionList = database.readDatabaseFile(transaction);
-
-        int k = 1;
-        for (int i = 0; i < transactionList.size(); i++) {
-            System.out.println("ID: " + k + ", " + transactionList.get(i));
-            k++;
-        }
+        helper.searchUserInTransactionDatabase(user, transaction);
     }
 
     public void displayWalletBalance() {
