@@ -46,7 +46,8 @@ public class Helper {
         List<Wallet> userWallet = new ArrayList<>(); // ta zmienna zeby wartosc tego portfela byla w funkcji/zwaracla ja
         for (int i = 0; i < searchWalletList.size(); i++) {
             if (searchWalletList.get(i).login.equals(user.login)) {
-                wallet.createUserWallet(searchWalletList.get(i).walletBalance, searchWalletList.get(i).userId, searchWalletList.get(i).login,
+                wallet.createUserWallet(searchWalletList.get(i).walletBalanceEUR, searchWalletList.get(i).walletBalanceUSD,
+                        searchWalletList.get(i).walletBalanceGBP, searchWalletList.get(i).userId, searchWalletList.get(i).login,
                         searchWalletList.get(i).name, searchWalletList.get(i).surname);
                 userWallet.add(wallet);
             }
@@ -54,15 +55,27 @@ public class Helper {
         return userWallet;
     }
 
-    public void walletUpdate (Wallet wallet) throws IOException {
-        double updateWalletValue = wallet.walletBalance + wallet.enterWallet; // obliczanie nowej wartosci portfela
-        wallet.walletBalance = updateWalletValue; // zapisanie do glownej zmiennej
-        List<Wallet> searchWalletList = database.readDatabaseFile(wallet); //wczystanie bazy danych wszystkich uzytkownikow
+    public void walletUpdate (Wallet wallet, String walletType) throws IOException {
+        if (walletType.equals("EUR")){
+            double updateWalletBalance = wallet.walletBalanceEUR + wallet.chargeAmount;
+            wallet.walletBalanceEUR = updateWalletBalance;
+        } else if (walletType.equals("USD")) {
+            double updateWalletBalance = wallet.walletBalanceUSD + wallet.chargeAmount;
+            wallet.walletBalanceUSD = updateWalletBalance;
+        } else if (walletType.equals("GBP")) {
+            double updateWalletBalance = wallet.walletBalanceGBP + wallet.chargeAmount;
+            wallet.walletBalanceGBP = updateWalletBalance;
+        } else {
+            System.out.println("Wallet wasn't updated");
+        }
 
+        List<Wallet> searchWalletList = database.readDatabaseFile(wallet); //wczystanie bazy danych wszystkich uzytkownikow
 //        stworzenie nowej listy uzytkownikow (starzy + nowy)
         for (int i = 0; i < searchWalletList.size(); i++) {
             if (searchWalletList.get(i).login.equals(wallet.login)) {
-                searchWalletList.get(i).walletBalance = wallet.walletBalance; // zamienia wartosci
+                searchWalletList.get(i).walletBalanceEUR = wallet.walletBalanceEUR; // zamienia wartosci
+                searchWalletList.get(i).walletBalanceUSD = wallet.walletBalanceUSD;
+                searchWalletList.get(i).walletBalanceGBP = wallet.walletBalanceGBP;
             }
         }
 
@@ -75,13 +88,74 @@ public class Helper {
         printWriter.close();
     }
 
+////    -------------------- original -----------------------
+//    public void walletUpdate (Wallet wallet) throws IOException {
+//        double updateWalletValue = wallet.walletBalance + wallet.chargeAmount; // obliczanie nowej wartosci portfela
+//        wallet.walletBalance = updateWalletValue; // zapisanie do glownej zmiennej
+//        List<Wallet> searchWalletList = database.readDatabaseFile(wallet); //wczystanie bazy danych wszystkich uzytkownikow
+//
+////        stworzenie nowej listy uzytkownikow (starzy + nowy)
+//        for (int i = 0; i < searchWalletList.size(); i++) {
+//            if (searchWalletList.get(i).login.equals(wallet.login)) {
+//                searchWalletList.get(i).walletBalance = wallet.walletBalance; // zamienia wartosci
+//            }
+//        }
+//
+////        zapisanie listy uzystkonikow w pliku
+//        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
+//        PrintWriter printWriter = new PrintWriter(fileWriter);
+//        for (int i = 0; i < searchWalletList.size(); i++) { // petla zeby liste zapisalo (kazdy wpis po przecinku)
+//            printWriter.print(searchWalletList.get(i) + "\n");
+//        }
+//        printWriter.close();
+//    }
+
+//    do zrobienia
+//    dodac ograniczenia jak portfel jest zero
     public void walletUpdateAfterTransaction (Transaction transaction, Wallet wallet) throws IOException {
         List<Wallet> searchWalletList = database.readDatabaseFile(wallet); // wczystanie bazy danych wszystkich uzytkownikow
 
-//        stworzenie nowej listy uzytkownikow (starzy + nowy)
-        for (int i = 0; i < searchWalletList.size(); i++) {
-            if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
-                searchWalletList.get(i).walletBalance = wallet.walletBalance - transaction.amount; // zamienia wartosci - obliczanie walleta
+        if (transaction.currency1.equals("EUR") && transaction.currency2.equals("USD")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceEUR = wallet.walletBalanceEUR - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceUSD = wallet.walletBalanceUSD + transaction.value;
+                }
+            }
+        } else if (transaction.currency1.equals("EUR") && transaction.currency2.equals("GBP")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceEUR = wallet.walletBalanceEUR - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceGBP = wallet.walletBalanceGBP + transaction.value;
+                }
+            }
+        } else if (transaction.currency1.equals("USD") && transaction.currency2.equals("EUR")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceUSD = wallet.walletBalanceUSD - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceEUR = wallet.walletBalanceEUR + transaction.value;
+                }
+            }
+        } else if (transaction.currency1.equals("USD") && transaction.currency2.equals("GBP")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceUSD = wallet.walletBalanceUSD - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceGBP = wallet.walletBalanceGBP + transaction.value;
+                }
+            }
+        } else if (transaction.currency1.equals("GBP") && transaction.currency2.equals("EUR")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceGBP = wallet.walletBalanceGBP - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceEUR = wallet.walletBalanceEUR + transaction.value;
+                }
+            }
+        } else if (transaction.currency1.equals("GBP") && transaction.currency2.equals("USD")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceGBP = wallet.walletBalanceGBP - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceUSD = wallet.walletBalanceUSD + transaction.value;
+                }
             }
         }
 
@@ -94,6 +168,33 @@ public class Helper {
         printWriter.close();
     }
 
+////    --------------------------------- original ----------------------------
+//    public void walletUpdateAfterTransaction (Transaction transaction, Wallet wallet) throws IOException {
+//        List<Wallet> searchWalletList = database.readDatabaseFile(wallet); // wczystanie bazy danych wszystkich uzytkownikow
+//
+//        if (transaction.currency1.equals("EUR")) {
+//            for (int i = 0; i < searchWalletList.size(); i++) {
+//                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+//                    searchWalletList.get(i).walletBalance = wallet.walletBalance - transaction.amount; // zamienia wartosci - obliczanie walleta
+//                }
+//            }
+//
+//        }
+//
+////        ----- original wewnetrzny -----
+////        zapisanie listy uzystkonikow w pliku
+//        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
+//        PrintWriter printWriter = new PrintWriter(fileWriter);
+//        for (int i = 0; i < searchWalletList.size(); i++) { // petla zeby liste zapisalo (kazdy wpis po przecinku)
+//            printWriter.print(searchWalletList.get(i) + "\n");
+//        }
+//        printWriter.close();
+//    }
+
+
+
+//    ---------------------------------------------------------------------
+//    -----------------------------------------------------------------------
 //    ---------------------------------------------------------------------
 //    public void userListSortedById() {
 //        List<User> userId = readUserDatabaseFile();

@@ -7,27 +7,38 @@ public class Wallet extends Transaction {
     public double walletBalanceEUR;
     public double walletBalanceUSD;
     public double walletBalanceGBP;
-    public double enterWallet;
+    public double chargeAmount;
 
-    public Wallet (double walletBalance, int userId, String login, String name, String surname) {
-        this.walletBalance = walletBalance;
+    public Wallet (double walletBalanceEUR, double walletBalanceUSD, double walletBalanceGBP, int userId, String login, String name, String surname) {
+        this.walletBalanceEUR = walletBalanceEUR;
+        this.walletBalanceUSD = walletBalanceUSD;
+        this.walletBalanceGBP = walletBalanceGBP;
         this.userId = userId;
         this.login = login;
         this.name = name;
         this.surname = surname;
     }
 
+////    -------------- original -----------
+//    public Wallet (double walletBalance, int userId, String login, String name, String surname) {
+//        this.walletBalance = walletBalance;
+//        this.userId = userId;
+//        this.login = login;
+//        this.name = name;
+//        this.surname = surname;
+//    }
+
     public Wallet () {
     }
 
-    public void setEnterWallet() {
-        System.out.println("Charge Wallet: ");
+    public void setChargeAmount() {
+        System.out.println("Enter charge amount: ");
         Scanner scan = new Scanner(System.in);
-        this.enterWallet = Double.parseDouble(scan.next());
+        this.chargeAmount = Double.parseDouble(scan.next());
     }
 
-    public double getEnterWallet(){
-        return enterWallet;
+    public double getChargeAmount(){
+        return chargeAmount;
     }
 
     public void setWalletBalance(){
@@ -62,19 +73,33 @@ public class Wallet extends Transaction {
         this.walletBalanceGBP = walletBalanceGBP;
     }
 
-    public Wallet createUserWallet(double walletBalance, int userId, String login,
-                                           String name, String surname) {
-        this.walletBalance = walletBalance;
+    public Wallet createUserWallet(double walletBalanceEUR, double walletBalanceUSD, double walletBalanceGBP,
+                                   int userId, String login, String name, String surname) {
+        this.walletBalanceEUR = walletBalanceEUR;
+        this.walletBalanceUSD = walletBalanceUSD;
+        this.walletBalanceGBP = walletBalanceGBP;
         this.userId = userId;
         this.login = login;
         this.name = name;
         this.surname = surname;
 
-        return new Wallet(walletBalance, userId, login, name, surname);
+        return new Wallet(walletBalanceEUR, walletBalanceUSD, walletBalanceGBP, userId, login, name, surname);
     }
 
+////    ---------------- original ----------
+//    public Wallet createUserWallet(double walletBalance, int userId, String login,
+//                                           String name, String surname) {
+//        this.walletBalance = walletBalance;
+//        this.userId = userId;
+//        this.login = login;
+//        this.name = name;
+//        this.surname = surname;
+//
+//        return new Wallet(walletBalance, userId, login, name, surname);
+//    }
+
     public String toString() {
-        return walletBalance + ", " + userId + ", " + login +
-                ", " + name + ", " + surname;
+        return walletBalanceEUR + ", " + walletBalanceUSD + ", " + walletBalanceGBP + ", " + userId + ", " +
+                login + ", " + name + ", " + surname;
     }
 }

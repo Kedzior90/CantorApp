@@ -178,7 +178,9 @@ public class Display {
         System.out.print("\t*" + user.login + "* wallet balance");
         System.out.print("\n************************************\n");
         helper.searchUserWallet(user, wallet); // szukanie uzytkownika po loginie w bazie danych i tworzenie mu portfela na podstawie danych z bazy danych
-        System.out.println("Wallet Balance: " + wallet.walletBalance);
+        System.out.println("Wallet Balance EUR: " + wallet.walletBalanceEUR);
+        System.out.println("Wallet Balance USD: " + wallet.walletBalanceUSD);
+        System.out.println("Wallet Balance GBP: " + wallet.walletBalanceGBP);
     }
 
     public void displayWalletCharge() throws IOException {
@@ -186,14 +188,19 @@ public class Display {
         System.out.print("\t*" + user.login + "* charge wallet balance");
         System.out.print("\n************************************\n");
         helper.searchUserWallet(user, wallet); //tworzenie portfela zalagowanego uzytkownika
-        wallet.setEnterWallet();
-        helper.walletUpdate(wallet);
+        System.out.print("Enter wallet type (EUR/USD/GBP): ");
+        Scanner scan = new Scanner(System.in);
+        String walletType = scan.next().toUpperCase();
+        wallet.setChargeAmount();
+        helper.walletUpdate(wallet, walletType);
 
         System.out.print("\n********** Wallet Status **********\n");
-        System.out.print("Wallet balance: " + wallet.walletBalance +
-                "\nLogin:\t\t\t" + user.login +
-                "\nName:\t\t\t" + user.name +
-                "\nSurname:\t\t" + user.surname);
+        System.out.print("Wallet balance EUR: " + wallet.walletBalanceEUR + "\n");
+        System.out.print("Wallet balance USD: " + wallet.walletBalanceUSD + "\n");
+        System.out.print("Wallet balance GBP: " + wallet.walletBalanceGBP + "\n");
+        System.out.print("Login:\t\t\t\t" + user.login + "\n");
+        System.out.print("Name:\t\t\t\t" + user.name + "\n");
+        System.out.print("Surname:\t\t\t" + user.surname + "\n");
         System.out.print("\n************************************\n");
     }
 
