@@ -52,9 +52,17 @@ public class Database {
     public void saveNewUserInWalletDatabase(User user) throws IOException {
         FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"), true);
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print("0.0" + ", " + user.userId + ", " + user.login + ", " + user.name + ", " + user.surname + "\n");
+        printWriter.print("0.0" + ", " + "0.0" + ", " + "0.0" + ", " + user.userId + ", " + user.login + ", " + user.name + ", " + user.surname + "\n");
         printWriter.close();
     }
+
+////    ------------- original ------------
+//    public void saveNewUserInWalletDatabase(User user) throws IOException {
+//        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"), true);
+//        PrintWriter printWriter = new PrintWriter(fileWriter);
+//        printWriter.print("0.0" + ", " + user.userId + ", " + user.login + ", " + user.name + ", " + user.surname + "\n");
+//        printWriter.close();
+//    }
 
     public List<User> readDatabaseFile(User user) {
         List<User> userList = new ArrayList<>();
@@ -168,12 +176,25 @@ public class Database {
     }
 
     private static Wallet createWalletDatabase(String[] metadata) {
-        double wallet = Double.parseDouble(metadata[0]);
-        int walletUserId = Integer.parseInt(metadata[1]);
-        String walletLogin = metadata[2];
-        String walletName = metadata[3];
-        String walletSurname = metadata[4];
+        double walletBalanceEUR = Double.parseDouble(metadata[0]);
+        double walletBalanceUSD = Double.parseDouble(metadata[1]);
+        double walletBalanceGBP = Double.parseDouble(metadata[2]);
+        int userId = Integer.parseInt(metadata[3]);
+        String login = metadata[4];
+        String name = metadata[5];
+        String surname = metadata[6];
 
-        return new Wallet(wallet, walletUserId, walletLogin, walletName, walletSurname);
+        return new Wallet(walletBalanceEUR, walletBalanceUSD, walletBalanceGBP, userId, login, name, surname);
     }
+
+////    ----------- original -----------
+//    private static Wallet createWalletDatabase(String[] metadata) {
+//        double wallet = Double.parseDouble(metadata[0]);
+//        int walletUserId = Integer.parseInt(metadata[1]);
+//        String walletLogin = metadata[2];
+//        String walletName = metadata[3];
+//        String walletSurname = metadata[4];
+//
+//        return new Wallet(wallet, walletUserId, walletLogin, walletName, walletSurname);
+//    }
 }
