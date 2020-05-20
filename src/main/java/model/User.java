@@ -41,7 +41,7 @@ public class User {
     public void setLogin() {
         System.out.print("Enter Login: ");
         Scanner scan = new Scanner(System.in);
-        this.login = scan.nextLine();
+        this.login = scan.next();
     }
 
     public String getLogin(){
@@ -51,7 +51,7 @@ public class User {
     public void setName() {
         System.out.print("Enter Name: ");
         Scanner scan = new Scanner(System.in);
-        this.name = scan.nextLine();
+        this.name = scan.next();
     }
 
     public String getName(){
@@ -61,7 +61,7 @@ public class User {
     public void setSurname() {
         System.out.print("Enter Surname: ");
         Scanner scan = new Scanner(System.in);
-        this.surname = scan.nextLine();
+        this.surname = scan.next();
     }
 
     public String getSurname(){
@@ -71,7 +71,7 @@ public class User {
     public void setPassword() {
         System.out.print("Enter Password: ");
         Scanner scan = new Scanner(System.in);
-        this.password = scan.nextLine();
+        this.password = scan.next();
     }
 
     public String getPassword(){

@@ -33,7 +33,7 @@ public class Database {
         try {
             String content = transaction.amount + ", " + transaction.currency1 + ", " +
                     transaction.currency2 + ", " + transaction.rate + ", " + transaction.value + ", " +
-                    transaction.tradeDate + ", " + user.userId + ", " + user.login + ", " +
+                    transaction.transactionDate + ", " + user.userId + ", " + user.login + ", " +
                     user.name + ", " + user.surname + "\n";
             Files.writeString(Paths.get(System.getProperty("transaction.database")), content, StandardOpenOption.APPEND);
         } catch (IOException exception) {

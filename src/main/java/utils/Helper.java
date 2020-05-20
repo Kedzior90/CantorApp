@@ -75,6 +75,25 @@ public class Helper {
         printWriter.close();
     }
 
+    public void walletUpdateAfterTransaction (Transaction transaction, Wallet wallet) throws IOException {
+        List<Wallet> searchWalletList = database.readDatabaseFile(wallet); // wczystanie bazy danych wszystkich uzytkownikow
+
+//        stworzenie nowej listy uzytkownikow (starzy + nowy)
+        for (int i = 0; i < searchWalletList.size(); i++) {
+            if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                searchWalletList.get(i).walletBalance = wallet.walletBalance - transaction.amount; // zamienia wartosci - obliczanie walleta
+            }
+        }
+
+//        zapisanie listy uzystkonikow w pliku
+        FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        for (int i = 0; i < searchWalletList.size(); i++) { // petla zeby liste zapisalo (kazdy wpis po przecinku)
+            printWriter.print(searchWalletList.get(i) + "\n");
+        }
+        printWriter.close();
+    }
+
 //    ---------------------------------------------------------------------
 //    public void userListSortedById() {
 //        List<User> userId = readUserDatabaseFile();

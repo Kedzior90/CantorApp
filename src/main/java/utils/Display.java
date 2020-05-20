@@ -106,13 +106,15 @@ public class Display {
         transaction.setValue(transaction.getRate(), transaction.getAmount()); // obliczanie wartosci wymiany
         transaction.setTradeDate(); // ustalanie daty tranzakcji
         database.saveInDatabase(user, transaction); //zapisanie tranzakcji w bazie danych
+        helper.walletUpdateAfterTransaction(transaction, wallet);
 
         System.out.print("\n********* Transaction data *********\n");
-        System.out.print("TradeDate:\t" + transaction.tradeDate +
+        System.out.print("TradeDate:\t" + transaction.transactionDate +
                 "\nAmount:\t\t" + transaction.amount +
                 "\nCurrency1:\t" + transaction.currency1 +
                 "\nCurrency2:\t" + transaction.currency2 +
                 "\nRate:\t\t" + transaction.rate +
+                "\nValue:\t\t" + transaction.value +
                 "\nUser ID:\t" + user.userId +
                 "\nLogin:\t\t" + user.login +
                 "\nName:\t\t" + user.name +
@@ -144,11 +146,11 @@ public class Display {
         System.out.print("\t\t\tCheck Rates");
         System.out.print("\n************************************\n");
         transaction.setTradeDate();
-        System.out.print("Today is: " + transaction.getTradeDate());
+        System.out.print("Today is: " + transaction.getTransactionDate() + "\n");
         transaction.setCurrency1();
         transaction.setCurrency2();
         transaction.setRate(transaction.getCurrency1(), transaction.getCurrency2());
-        System.out.println("Rate:\t\t" + transaction.getRate());
+        System.out.println("Rate:\t\t\t" + transaction.getRate());
     }
 
     public void displayUserMenu() {
