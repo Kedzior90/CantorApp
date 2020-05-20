@@ -106,7 +106,7 @@ public class Display {
         transaction.setValue(transaction.getRate(), transaction.getAmount()); // obliczanie wartosci wymiany
         transaction.setTradeDate(); // ustalanie daty tranzakcji
         database.saveInDatabase(user, transaction); //zapisanie tranzakcji w bazie danych
-//        helper.walletUpdateAfterTransaction(transaction, wallet);
+        helper.walletUpdateAfterTransaction(transaction, wallet);
 
         System.out.print("\n********* Transaction data *********\n");
         System.out.print("TradeDate:\t" + transaction.transactionDate +

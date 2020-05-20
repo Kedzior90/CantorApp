@@ -111,17 +111,54 @@ public class Helper {
 //    }
 
 //    do zrobienia
-    public void walletUpdateAfterTransaction (Transaction transaction, Wallet wallet, String walletType) throws IOException {
+//    dodac ograniczenia jak portfel jest zero
+    public void walletUpdateAfterTransaction (Transaction transaction, Wallet wallet) throws IOException {
         List<Wallet> searchWalletList = database.readDatabaseFile(wallet); // wczystanie bazy danych wszystkich uzytkownikow
 
-        if (transaction.currency1.equals(walletType)) {
+        if (transaction.currency1.equals("EUR") && transaction.currency2.equals("USD")) {
             for (int i = 0; i < searchWalletList.size(); i++) {
                 if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
-                    searchWalletList.get(i).walletBalance = wallet.walletBalance - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceEUR = wallet.walletBalanceEUR - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceUSD = wallet.walletBalanceUSD + transaction.value;
                 }
             }
-
+        } else if (transaction.currency1.equals("EUR") && transaction.currency2.equals("GBP")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceEUR = wallet.walletBalanceEUR - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceGBP = wallet.walletBalanceGBP + transaction.value;
+                }
+            }
+        } else if (transaction.currency1.equals("USD") && transaction.currency2.equals("EUR")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceUSD = wallet.walletBalanceUSD - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceEUR = wallet.walletBalanceEUR + transaction.value;
+                }
+            }
+        } else if (transaction.currency1.equals("USD") && transaction.currency2.equals("GBP")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceUSD = wallet.walletBalanceUSD - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceGBP = wallet.walletBalanceGBP + transaction.value;
+                }
+            }
+        } else if (transaction.currency1.equals("GBP") && transaction.currency2.equals("EUR")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceGBP = wallet.walletBalanceGBP - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceEUR = wallet.walletBalanceEUR + transaction.value;
+                }
+            }
+        } else if (transaction.currency1.equals("GBP") && transaction.currency2.equals("USD")) {
+            for (int i = 0; i < searchWalletList.size(); i++) {
+                if (searchWalletList.get(i).login.equals(wallet.login)) { // wybieranie tylko jednego uzytkownika
+                    searchWalletList.get(i).walletBalanceGBP = wallet.walletBalanceGBP - transaction.amount; // zamienia wartosci - obliczanie walleta
+                    searchWalletList.get(i).walletBalanceUSD = wallet.walletBalanceUSD + transaction.value;
+                }
+            }
         }
+
 //        zapisanie listy uzystkonikow w pliku
         FileWriter fileWriter = new FileWriter(System.getProperty("wallet.database"));
         PrintWriter printWriter = new PrintWriter(fileWriter);
@@ -154,6 +191,10 @@ public class Helper {
 //        printWriter.close();
 //    }
 
+
+
+//    ---------------------------------------------------------------------
+//    -----------------------------------------------------------------------
 //    ---------------------------------------------------------------------
 //    public void userListSortedById() {
 //        List<User> userId = readUserDatabaseFile();
