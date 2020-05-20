@@ -6,75 +6,76 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
-//ciekawy projekt do podpatrzenia https://www.journaldev.com/2315/java-json-example
-//listy artyhul https://www.geeksforgeeks.org/arrays-sort-in-java-with-examples/
+//to jest dobre https://www.javappa.com/kurs-java/wlasne-obiekty
 //stronka jak odczytac plik https://www.java67.com/2015/08/how-to-load-data-from-csv-file-in-java.html
 
 public class User {
+    public int userId;
     public String login;
     public String name;
     public String surname;
-    public String emailAddress;
     public String password;
     public String creationDate;
-    public int userId;
 
-    public User(int userId, String login, String name, String surname, String password, String emailAddress, String creationDate) {
+//    konstruktor potrzebny do stworzenia obiektu z UserDatabase
+    public User(int userId, String login, String name, String surname, String password, String creationDate) {
         this.login = login;
         this.name = name;
         this.surname = surname;
         this.password = password;
-        this.emailAddress = emailAddress;
         this.creationDate = creationDate;
         this.userId = userId;
+    }
+
+//    potrzebny do login
+    public User(int userId, String login, String name, String surname) {
+        this.userId = userId;
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
     }
 
     public User() {
     }
 
-    public void setUserLogin () {
+    public void setLogin() {
+        System.out.print("Enter Login: ");
         Scanner scan = new Scanner(System.in);
-        this.login = scan.nextLine();
+        this.login = scan.next();
     }
 
-    public String getUserLogin(){
+    public String getLogin(){
         return login;
     }
 
-    public void setUserName () {
+    public void setName() {
+        System.out.print("Enter Name: ");
         Scanner scan = new Scanner(System.in);
-        this.name = scan.nextLine();
+        this.name = scan.next();
     }
 
-    public String getUserName(){
+    public String getName(){
         return name;
     }
 
-    public void setUserSurname () {
+    public void setSurname() {
+        System.out.print("Enter Surname: ");
         Scanner scan = new Scanner(System.in);
-        this.surname = scan.nextLine();
+        this.surname = scan.next();
     }
 
-    public String getUserSurname(){
+    public String getSurname(){
         return surname;
     }
 
-    public void setUserPassword () {
+    public void setPassword() {
+        System.out.print("Enter Password: ");
         Scanner scan = new Scanner(System.in);
-        this.password = scan.nextLine();
+        this.password = scan.next();
     }
 
-    public String getUserPassword(){
+    public String getPassword(){
         return password;
-    }
-
-    public void setEmailAddress (){
-        Scanner scan = new Scanner(System.in);
-        this.emailAddress = scan.nextLine();
-    }
-
-    public String getEmailAddress () {
-        return emailAddress;
     }
 
     public void setDataCreation (){
@@ -97,10 +98,19 @@ public class User {
         return userId;
     }
 
+//    to jest potrebne do stworzenia uzytkjownika po zalogowaniu
+    public User createUser(int userId, String login, String name, String surname) {
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.userId = userId;
+
+        return new User(userId, login, name, surname);
+    }
+
     public String toString(){
         return "User ID: " + userId + ", Login: " + login +
                 ", Name: " + name + ", Surname: " + surname +
-                ", Password: " + password + ", Email Address: " + emailAddress +
-                ", Creation Date: " + creationDate;
+                ", Password: " + password + ", Creation Date: " + creationDate;
     }
 }

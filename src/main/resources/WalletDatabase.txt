@@ -1,0 +1,7 @@
+0.0, 0, adminLogin, adminName, adminSurname
+1.0, 1, admin, admin, admin
+50.0, 7885, a, a, a
+305.0, 5090, b, b, b
+0.0, 1277, t, t, t
+500.0, 3180, e, e, e
+0.0, 1650, asd, xvcb, gdfh
